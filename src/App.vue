@@ -13,6 +13,7 @@
    }
    allWeights.value.push(newWeight)
    currentWeight.value = newWeight.weight
+   weight.value = ''
  }
 </script>
 
@@ -23,7 +24,13 @@
 
   <form class="justify-center flex gap-2" @submit="submitForm">
     
-    <input step="0.1" class="border-2 border-black rounded" type="number" id="weight" v-model="weight">
+    <input step="0.1" 
+          class="px-2 border-2 border-black rounded" 
+          type="number"
+          id="weight" 
+          v-model="weight"
+          placeholder="Enter your weight"
+    >
     <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Submit</button>
   </form>
 
@@ -34,7 +41,11 @@
      <h5 class="text-gray-500 italic px-4 py-2 rounded">Latest 7 Days</h5>
     </div>
     <ul>
-      <li class="bg-slate-200 even:bg-slate-300 py-1 px-2" v-for="w in allWeights">{{ w.weight }}</li>
+      <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
+          v-for="w in allWeights"
+          :key="w.date"><span>{{ w.weight }}</span>
+          <span @click="handleDelete" class="text-red-600">X</span>
+        </li>
     </ul>
   </div>
 
