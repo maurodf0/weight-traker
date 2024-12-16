@@ -48,7 +48,7 @@
     </div>
     <ul>
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
-          v-for="w in allWeights"
+          v-for="w in allWeights.slice(-7)"
           :key="w.date"><span>{{ w.weight }}</span>
           <span @click="handleDelete(w.date)" class="text-red-600">X</span>
         </li>
