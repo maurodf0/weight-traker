@@ -15,6 +15,13 @@
    currentWeight.value = newWeight.weight
    weight.value = ''
  }
+
+ console.log(allWeights.value)
+
+ const handleDelete = (date: Date) => {
+
+  allWeights.value = allWeights.value.filter(w => w.date !== date)
+ }
 </script>
 
 <template>
@@ -44,7 +51,7 @@
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights"
           :key="w.date"><span>{{ w.weight }}</span>
-          <span @click="handleDelete" class="text-red-600">X</span>
+          <span @click="handleDelete(w.date)" class="text-red-600">X</span>
         </li>
     </ul>
   </div>
