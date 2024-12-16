@@ -1,9 +1,9 @@
 <script setup lang="ts">
  import { ref } from 'vue'
 
- const weight = ref(0)
- const currentWeight = ref(0)
- const allWeights = ref([])
+ const weight = ref<number>(0)
+ const currentWeight = ref<number>(0)
+ const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
  const submitForm = (e: Event) => {
    e.preventDefault()
