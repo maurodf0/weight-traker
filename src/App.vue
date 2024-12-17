@@ -18,14 +18,13 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
      weight: weight.value,
      date: new Date()
    }
-   allWeights.value.push(newWeight)
+   allWeights.value.unshift(newWeight)
    currentWeight.value = newWeight.weight
    weight.value = null;
  }
 
   const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
-
  }
 </script>
 
