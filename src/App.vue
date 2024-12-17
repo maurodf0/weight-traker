@@ -45,6 +45,10 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
     <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Submit</button>
   </form>
 
+  <div class="chartContainer" v-if="allWeights.length >0">
+    <canvas id="myChart"></canvas>
+  </div>
+
 
   <div v-if="allWeights.length > 0" class="m-4">
     <div class="flex justify-between">
