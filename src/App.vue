@@ -19,16 +19,15 @@
    weight.value = 0
  }
 
-
-
- const handleDelete = (date: Date) => {
+  const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
+
  }
 </script>
 
 <template>
   <h1 class="my-4 text-4xl mx-auto text-center">
-    {{ allWeights.length === 0 ? '0' : currentWeight }} <span class="text-sm">/ kg</span>
+    {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">/ kg</span>
   </h1>
 
   <form class="justify-center flex gap-2" @submit.prevent="submitForm">
