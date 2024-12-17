@@ -47,7 +47,7 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
   </form>
 
   <div class="chartContainer" v-if="allWeights.length >0">
-    <canvas id="myChart"></canvas>
+    <!-- <canvas id="myChart"></canvas> -->
   </div>
 
 
@@ -67,7 +67,7 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
     </ul>
   </div>
 
-  <div class="m-4" v-else>
+  <div v-else class="m-4">
     <p class="text-center text-gray-500">No weights yet. Add your're first weight and start yuor journey</p>
   </div>
 
