@@ -6,14 +6,17 @@
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
  const submitForm = (e: Event) => {
-   e.preventDefault()
+   if(!weight.value) {
+     alert('Please enter a weight')
+    return;
+   }
    let newWeight = {
      weight: weight.value,
      date: new Date()
    }
    allWeights.value.push(newWeight)
    currentWeight.value = newWeight.weight
-   weight.value = ''
+   weight.value.unfocus() 
  }
 
 
@@ -28,7 +31,7 @@
     {{ allWeights.length === 0 ? '0' : currentWeight }} <span class="text-sm">/ kg</span>
   </h1>
 
-  <form class="justify-center flex gap-2" @submit="submitForm">
+  <form class="justify-center flex gap-2" @submit.prevent="submitForm">
     
     <input step="0.1" 
           class="px-2 border-2 border-black rounded" 
