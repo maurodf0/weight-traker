@@ -67,6 +67,10 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
     </ul>
   </div>
 
+  <div class="m-4" v-else>
+    <p class="text-center text-gray-500">No weights yet. Add your're first weight and start yuor journey</p>
+  </div>
+
 </template>
 
 <style scoped>
