@@ -16,7 +16,7 @@
    }
    allWeights.value.push(newWeight)
    currentWeight.value = newWeight.weight
-   weight.value.unfocus() 
+   weight.value = 0
  }
 
 
