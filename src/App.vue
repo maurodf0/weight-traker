@@ -1,5 +1,6 @@
 <script setup lang="ts">
  import { ref } from 'vue'
+ import Chart from 'chart.js/auto';
 
  const weightInput = ref<number>(0)
  const currentWeight = ref<number>(0)
