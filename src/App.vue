@@ -8,7 +8,7 @@
 
  // Italian date format
 const localeIT = "it-IT"
-const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeric" }
+const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "numeric" }
 
  const submitForm = (e: Event) => {
    if(!weight.value) {
