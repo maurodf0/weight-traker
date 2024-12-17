@@ -34,7 +34,7 @@
   <form class="justify-center flex gap-2" @submit.prevent="submitForm">
     
     <input step="0.1" 
-          class="px-2 border-2 border-black rounded" 
+          class="px-2 border border-grey-800 :focus:border-black rounded-lg"
           type="number"
           id="weight" 
           v-model="weight"
