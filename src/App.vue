@@ -5,6 +5,10 @@
  const currentWeight = ref<number>(0)
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
+ // Italian date format
+const localeIT = "it-IT"
+const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeric" }
+
  const submitForm = (e: Event) => {
    if(!weight.value) {
      alert('Please enter a weight')
@@ -16,7 +20,7 @@
    }
    allWeights.value.push(newWeight)
    currentWeight.value = newWeight.weight
-   weight.value = 0
+   weight.value = null;
  }
 
   const handleDelete = (date: Date) => {
@@ -51,7 +55,9 @@
     <ul>
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights.slice(-7)"
-          :key="w.date"><span>{{ w.weight }}</span>
+          :key="w.date"><span>{{ w.weight }} - 
+            <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
+           </span>
           <span @click="handleDelete(w.date)" class="text-red-600">X</span>
         </li>
     </ul>
