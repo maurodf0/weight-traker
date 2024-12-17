@@ -55,7 +55,7 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
     <ul>
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights.slice(-7)"
-          :key="w.date"><span>{{ w.weight }} - 
+          :key="w.date.toString()"><span>{{ w.weight }} - 
             <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
            </span>
           <span @click="handleDelete(w.date)" class="text-red-600">X</span>
