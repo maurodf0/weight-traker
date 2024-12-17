@@ -1,10 +1,8 @@
 <script setup lang="ts">
- import { computed, ref } from 'vue'
+ import { ref } from 'vue'
 
- const weight = ref<number>(0)
- const currentWeight = computed(() => {
-  return allWeights.value.sort((a, b) => b.date - a.date)[0]?.weight || 0
- }
+ const weightInput = ref<number>(0)
+ const currentWeight = ref<number>(0)
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
  // Italian date format
@@ -18,7 +16,7 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
    }
    let newWeight = {
      weight: weight.value,
-     date: new Date().getTime()
+     date: new Date()
    }
    allWeights.value.push(newWeight)
    currentWeight.value = newWeight.weight
@@ -42,7 +40,7 @@ const optionsIT = { weekday:"long", year: "numeric", month: "long", day: "numeri
           class="px-2 border border-grey-800 :focus:border-black rounded-lg"
           type="number"
           id="weight" 
-          v-model="weight"
+          v-model="weightInput"
           placeholder="Enter your weight"
     >
     <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Submit</button>
