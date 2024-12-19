@@ -1,10 +1,17 @@
 <script setup lang="ts">
- import { ref } from 'vue'
+ import { ref, watch, onMounted} from 'vue'
  import Chart from 'chart.js/auto';
 
+
  const weightInput = ref<number>(0)
- const currentWeight = ref<number>(0)
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
+ const currentWeight = ref<number>(allWeights[0]); 
+
+ watch( allWeights, () => {
+  localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
+ })
+
+
 
  // Italian date format
 const localeIT = "it-IT"
