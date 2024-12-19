@@ -5,7 +5,10 @@
 onMounted(() => {
   const storedWeights = localStorage.getItem('allWeights')
   if(storedWeights) {
-    allWeights.value = JSON.parse(storedWeights)
+   allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
+      weight: w.weight,
+      date: new Date(w.date),
+    }));
   }
 })
 
@@ -27,16 +30,16 @@ const localeIT = "it-IT"
 const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "numeric" }
 
  const submitForm = (e: Event) => {
-   if(!weight.value) {
+   if(!weightInput.value) {
      alert('Please enter a weight')
     return;
    }
    let newWeight = {
-     weight: weight.value,
+     weight: weightInput.value,
      date: new Date()
    }
    allWeights.value.unshift(newWeight)
-   currentWeight.value = newWeight.weight
+   currentWeight.value = allWeights.value[0].weight
    weightInput.value = null;
  }
 
@@ -76,7 +79,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights.slice(-7)"
           :key="w.date.toString()"><span>{{ w.weight }} - 
-            <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
+            <span class="text-sm text-gray-500">{{ w.date.toLocaleTimeString('it-IT') }}</span>
            </span>
           <span @click="handleDelete(w.date)" class="text-red-600">X</span>
         </li>
