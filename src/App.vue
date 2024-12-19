@@ -22,8 +22,6 @@ const currentWeight = computed(() => {
   localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
  }, { deep: true })
 
-
-
  // Italian date format
 const localeIT = "it-IT"
 const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "numeric" }
@@ -39,7 +37,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    }
    allWeights.value.unshift(newWeight)
    currentWeight.value = newWeight.weight
-   weight.value = null;
+   weightInput.value = null;
  }
 
   const handleDelete = (date: Date) => {
@@ -64,7 +62,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
     <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Submit</button>
   </form>
 
-  <div class="chartContainer" v-if="allWeights.length >0">
+  <div class="chartContainer" v-if="allWeights.length > 0">
     <!-- <canvas id="myChart"></canvas> -->
   </div>
 
