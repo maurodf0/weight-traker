@@ -33,9 +33,11 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
  const submitForm = (e: Event) => {
    if(!weightInput.value) {
      alert('Please enter a weight')
+      weightInput.value = null;
     return;
    } else if(weightInput.value < 0) {
      alert('Weight cannot be negative')
+      weightInput.value = null;
      return;
    }
    let newWeight = {
@@ -85,7 +87,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
           v-for="w in allWeights.slice(-7)"
           :key="w.date.toString()">
           <span>{{ w.weight }} - 
-            <span class="text-sm text-gray-500">{{ w.date.toLocaleTimeString(localeIT, optionsIT) }}</span>
+            <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
            </span>
           <span v-auto-animate  @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span> 
         </li>
