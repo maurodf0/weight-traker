@@ -84,7 +84,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
           <span>{{ w.weight }} - 
             <span class="text-sm text-gray-500">{{ w.date.toLocaleTimeString(localeIT, optionsIT) }}</span>
            </span>
-          <span  v-auto-animate  @click="handleDelete(w.date)" class="text-red-600">X</span>
+          <span v-auto-animate  @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span> 
         </li>
     </ul>
   </div>
