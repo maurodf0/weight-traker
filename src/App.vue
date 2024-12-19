@@ -2,6 +2,7 @@
  import { ref, watch, onMounted, computed  } from 'vue'
  import Chart from 'chart.js/auto';
  import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+ import NumberAnimation from "vue-number-animation";
 
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
@@ -75,9 +76,21 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
 
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
-    <h1 class="my-4 text-4xl font-bold text-center text-blue-600">
+    <!-- <h1 class="my-4 text-4xl font-bold text-center text-blue-600">
       {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">kg</span>
-    </h1>
+    </h1> -->
+
+    <NumberAnimation class="text-center text-4xl font-bold text-blue-600"
+    ref="currentWeight"
+	:from="0"
+  tag="h1"
+	:to="currentWeight"
+	:format="weight => weight.toFixed(1) + ' kg'"
+	:duration=".25"
+	autoplay
+    easing="linear"
+/>
+
     <h4 class="text-center text-lg mb-4 text-gray-600" v-if="message">{{ message }}</h4>
 
     <form class="flex flex-col gap-4" @submit.prevent="submitForm">
