@@ -7,11 +7,17 @@
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
  const currentWeight = ref<number>(allWeights[0]); 
 
- watch( allWeights, () => {
+ watch(allWeights, (allWeights) => {
+  console.log(allWeights.value)
   localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
  })
 
-
+onMounted(() => {
+  const storedWeights = localStorage.getItem('allWeights')
+  if(storedWeights) {
+    allWeights.value = JSON.parse(storedWeights)
+  }
+}, { deep: true })
 
  // Italian date format
 const localeIT = "it-IT"
