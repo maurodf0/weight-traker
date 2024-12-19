@@ -26,6 +26,7 @@ onMounted(() => {
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
 const currentWeight = computed(() => {
+  console.log(allWeights.value)
   return allWeights.value.length > 0 ? allWeights.value[0].weight : 0;
 });
 
@@ -73,50 +74,49 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
 </script>
 
 <template>
-  <h1 class="my-4 text-4xl mx-auto text-center">
-    {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">/ kg</span>
-  </h1>
-  <h4 class="text-center mb-4" v-if="message">{{ message }}</h4>
+  <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
+    <h1 class="my-4 text-4xl font-bold text-center text-blue-600">
+      {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">kg</span>
+    </h1>
+    <h4 class="text-center text-lg mb-4 text-gray-600" v-if="message">{{ message }}</h4>
 
-  <form class="justify-center flex gap-2" @submit.prevent="submitForm">
-    
-    <input step="0.1" 
-          class="px-2 border border-grey-800 :focus:border-black rounded-lg"
-          type="number"
-          id="weight" 
-          v-model="weightInput"
-          placeholder="Enter your weight"
-    >
-    <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Submit</button>
-  </form>
+    <form class="flex flex-col gap-4" @submit.prevent="submitForm">
+      <input step="0.1" 
+             class="px-4 py-2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg"
+             type="number"
+             id="weight" 
+             v-model="weightInput"
+             placeholder="Enter your weight">
+      <button class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600" type="submit">
+        Submit
+      </button>
+    </form>
 
-  <div class="chartContainer" v-if="allWeights.length > 0">
-    <canvas ref="chart"></canvas>
-  </div>
-
-
-  <div
-    v-if="allWeights.length > 0" class="m-4">
-    <div class="flex justify-between">
-     <h2 class="text-xl">Weights History</h2>
-     <h5 class="text-gray-500 italic px-4 py-2 rounded">Latests</h5>
+    <div class="chartContainer mt-6" v-if="allWeights.length > 0">
+      <canvas ref="chart"></canvas>
     </div>
-    <ul v-auto-animate>
-      <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
-          v-for="w in allWeights.slice(-7)"
-          :key="w.date.toString()">
-          <span>{{ w.weight }} - 
+
+    <div v-if="allWeights.length > 0" class="mt-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
+        <h5 class="text-gray-500 italic px-4 py-2 rounded">Latest</h5>
+      </div>
+      <ul v-auto-animate>
+        <li class="flex justify-between items-center bg-gray-100 even:bg-gray-200 py-2 px-4 rounded mb-2"
+            v-for="w in allWeights.slice(-7)"
+            :key="w.date.toString()">
+          <span>{{ w.weight }} <span class="text-sm">Kg</span> - 
             <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
-           </span>
-          <span v-auto-animate  @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span> 
+          </span>
+          <span v-auto-animate @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span>
         </li>
-    </ul>
-  </div>
+      </ul>
+    </div>
 
-  <div v-auto-animate v-else class="m-4">
-    <p class="text-center text-gray-500">No weights yet. Add your're first weight and start yuor journey</p>
+    <div v-auto-animate v-else class="mt-6">
+      <p class="text-center text-gray-500">No weights yet. Add your first weight and start your journey.</p>
+    </div>
   </div>
-
 </template>
 
 <style scoped>
