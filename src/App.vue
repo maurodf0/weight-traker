@@ -3,6 +3,10 @@
  import Chart from 'chart.js/auto';
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
+  const chart = ref<HTMLCanvasElement | null>(null)
+
+
+
 onMounted(() => {
   const storedWeights = localStorage.getItem('allWeights')
   if(storedWeights) {
@@ -13,7 +17,7 @@ onMounted(() => {
   }
 })
 
- const weightInput = ref<number>(0)
+ const weightInput = ref<number | null>(null)
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
 const currentWeight = computed(() => {
@@ -72,7 +76,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   </form>
 
   <div class="chartContainer" v-if="allWeights.length > 0">
-    <!-- <canvas id="myChart"></canvas> -->
+    <canvas ref="chart"></canvas>
   </div>
 
 
