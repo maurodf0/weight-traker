@@ -1,13 +1,14 @@
 <script setup lang="ts">
  import { ref, watch, onMounted, computed  } from 'vue'
  import Chart from 'chart.js/auto';
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 onMounted(() => {
   const storedWeights = localStorage.getItem('allWeights')
   if(storedWeights) {
    allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
       weight: w.weight,
-      date: new Date(w.date),
+      date: new Date(w.date)
     }));
   }
 })
@@ -36,7 +37,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    }
    let newWeight = {
      weight: weightInput.value,
-     date: new Date()
+     date: new Date
    }
    allWeights.value.unshift(newWeight)
    currentWeight.value = allWeights.value[0].weight
@@ -70,18 +71,20 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   </div>
 
 
-  <div v-if="allWeights.length > 0" class="m-4">
+  <div
+    v-if="allWeights.length > 0" class="m-4">
     <div class="flex justify-between">
      <h2 class="text-xl">Weights History</h2>
      <h5 class="text-gray-500 italic px-4 py-2 rounded">Latests</h5>
     </div>
-    <ul>
+    <ul v-auto-animate >
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights.slice(-7)"
-          :key="w.date.toString()"><span>{{ w.weight }} - 
-            <span class="text-sm text-gray-500">{{ w.date.toLocaleTimeString('it-IT') }}</span>
+          :key="w.date.toString()">
+          <span>{{ w.weight }} - 
+            <span class="text-sm text-gray-500">{{ w.date.toLocaleTimeString(localeIT, optionsIT) }}</span>
            </span>
-          <span @click="handleDelete(w.date)" class="text-red-600">X</span>
+          <span  v-auto-animate  @click="handleDelete(w.date)" class="text-red-600">X</span>
         </li>
     </ul>
   </div>
