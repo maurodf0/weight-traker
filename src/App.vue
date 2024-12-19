@@ -34,7 +34,7 @@ watch(currentWeight, (newCurrentWeight, currentWeight) => {
   const difference = newCurrentWeight - currentWeight; 
   console.log(difference, 'questo è il nuovo ' + newCurrentWeight, currentWeight)
   if (difference > 0) {
-     message.value = `You've gained ${difference} kg`;
+     message.value = `You've gained ${difference.toFixed(1)} kg`;
   } else {
      message.value = `You've lost ${-difference} kg`;
   }
