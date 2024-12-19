@@ -1,9 +1,10 @@
 <script setup lang="ts">
  import { ref, watch, onMounted, computed  } from 'vue'
  import Chart from 'chart.js/auto';
-import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
   const chart = ref<HTMLCanvasElement | null>(null)
+  const message = ref<string | null>(null)
 
 
 
@@ -24,6 +25,14 @@ const currentWeight = computed(() => {
   return allWeights.value.length > 0 ? allWeights.value[0].weight : 0;
 });
 
+watch(currentWeight, (currentWeight, newCurrentWeight) => {
+  const difference = newCurrentWeight - currentWeight;
+  if (difference > 0) {
+    const message = `You've gained ${difference} kg`;
+  } else {
+    const message = `You've lost ${-difference} kg`;
+  }
+})
 
  watch(allWeights, () => {
   console.log(allWeights.value)
@@ -62,6 +71,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   <h1 class="my-4 text-4xl mx-auto text-center">
     {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">/ kg</span>
   </h1>
+  <h4>{{ message }}</h4>
 
   <form class="justify-center flex gap-2" @submit.prevent="submitForm">
     
@@ -86,7 +96,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
      <h2 class="text-xl">Weights History</h2>
      <h5 class="text-gray-500 italic px-4 py-2 rounded">Latests</h5>
     </div>
-    <ul v-auto-animate >
+    <ul v-auto-animate>
       <li class=" flex justify-between bg-slate-200 even:bg-slate-300 py-1 px-2" 
           v-for="w in allWeights.slice(-7)"
           :key="w.date.toString()">
@@ -98,7 +108,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
     </ul>
   </div>
 
-  <div v-else class="m-4">
+  <div v-auto-animate v-else class="m-4">
     <p class="text-center text-gray-500">No weights yet. Add your're first weight and start yuor journey</p>
   </div>
 
