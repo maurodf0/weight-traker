@@ -16,6 +16,10 @@ onMounted(() => {
       date: new Date(w.date)
     }));
   }
+  const storedeMessage = localStorage.getItem('message')
+  if(storedeMessage) {
+    message.value = storedeMessage
+  }
 })
 
  const weightInput = ref<number | null>(null)
@@ -25,17 +29,18 @@ const currentWeight = computed(() => {
   return allWeights.value.length > 0 ? allWeights.value[0].weight : 0;
 });
 
-watch(currentWeight, (currentWeight, newCurrentWeight) => {
-  const difference = newCurrentWeight - currentWeight;
+watch(currentWeight, (newCurrentWeight, currentWeight) => {
+  const difference = newCurrentWeight - currentWeight; 
+  console.log(difference, 'questo è il nuovo ' + newCurrentWeight, currentWeight)
   if (difference > 0) {
-    const message = `You've gained ${difference} kg`;
+     message.value = `You've gained ${difference} kg`;
   } else {
-    const message = `You've lost ${-difference} kg`;
+     message.value = `You've lost ${-difference} kg`;
   }
+  localStorage.setItem('message', message.value);
 })
 
  watch(allWeights, () => {
-  console.log(allWeights.value)
   localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
  }, { deep: true })
 
@@ -71,7 +76,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   <h1 class="my-4 text-4xl mx-auto text-center">
     {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">/ kg</span>
   </h1>
-  <h4>{{ message }}</h4>
+  <h4 class="text-center mb-4" v-if="message">{{ message }}</h4>
 
   <form class="justify-center flex gap-2" @submit.prevent="submitForm">
     
