@@ -34,6 +34,9 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    if(!weightInput.value) {
      alert('Please enter a weight')
     return;
+   } else if(weightInput.value < 0) {
+     alert('Weight cannot be negative')
+     return;
    }
    let newWeight = {
      weight: weightInput.value,
