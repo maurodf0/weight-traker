@@ -86,7 +86,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   tag="h1"
 	:to="currentWeight"
 	:format="weight => weight.toFixed(1) + ' kg'"
-	:duration=".25"
+	:duration=".5"
 	autoplay
     easing="linear"
 />
