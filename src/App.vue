@@ -3,6 +3,9 @@
  import Chart from 'chart.js/auto';
  import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
  import NumberAnimation from "vue-number-animation";
+ import { useColorMode } from '@vueuse/core'
+
+const mode = useColorMode();
 
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
@@ -75,6 +78,13 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
 </script>
 
 <template>
+  
+    <UseColorMode v-slot="{ mode }">
+    <button @click="mode = mode === 'dark' ? 'light' : 'dark'">
+      Mode {{ mode }}
+    </button>
+  </UseColorMode>
+
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
     <!-- <h1 class="my-4 text-4xl font-bold text-center text-blue-600">
       {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">kg</span>
