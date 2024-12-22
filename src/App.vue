@@ -2,6 +2,7 @@
  import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
  import Chart from 'chart.js/auto';
  import NumberAnimation from "vue-number-animation";
+ import 'chartjs-adapter-date-fns';
 
   const weightChart = shallowRef<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
@@ -48,8 +49,10 @@ watch(currentWeight, (newCurrentWeight, currentWeight) => {
   localStorage.setItem('message', message.value);
 
   nextTick(() => {
-    weightChart.valie
-  })
+    weightChart.value = new Chart(weightChart.value.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: allWeights.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)),
 })
 
  watch(allWeights, () => {
