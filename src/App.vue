@@ -27,13 +27,15 @@ onMounted(() => {
  const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
 const currentWeight = computed(() => {
-  console.log(allWeights.value)
   return allWeights.value.length > 0 ? allWeights.value[0].weight : 0;
 });
 
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
+  if(currentWeight == 0 || newCurrentWeight == 0) {
+    message.value = ``;
+    return;
+  }
   const difference = newCurrentWeight - currentWeight; 
-  console.log(difference, 'questo è il nuovo ' + newCurrentWeight, currentWeight)
   if (difference > 0) {
      message.value = `You've gained ${difference.toFixed(1)} kg`;
   } else {
