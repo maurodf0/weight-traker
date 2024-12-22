@@ -1,8 +1,10 @@
 <script setup lang="ts">
  import { ref, watch, onMounted, computed  } from 'vue'
-import { Chart, registerables } from 'chart.js';
+ import { Chart, registerables } from 'chart.js';
  import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
  import NumberAnimation from "vue-number-animation";
+
+ Chart.register(...registerables);
 
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
@@ -20,6 +22,7 @@ onMounted(() => {
   const storedeMessage = localStorage.getItem('message')
   if(storedeMessage) {
     message.value = storedeMessage
+     renderChart();
   }
 })
 
@@ -79,6 +82,46 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
  }
+
+
+
+ const renderChart = () => {
+  if (!chart.value) return;
+
+  const ctx = chart.value.getContext('2d');
+  if (!ctx) return;
+
+  const chartData = {
+    labels: sortedWeight.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)),
+    datasets: [{
+      label: 'Weight',
+      data: sortedWeight.value.map(w => w.weight),
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: {
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'day'
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+};
+
+
 </script>
 
 <template>
