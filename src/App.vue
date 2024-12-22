@@ -132,6 +132,3 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   </div>
 </template>
 
-<style scoped>
-
-</style>
