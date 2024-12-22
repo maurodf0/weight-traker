@@ -6,7 +6,7 @@
 
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
-
+  const difference = ref<number | null>(null)
 
 
 onMounted(() => {
@@ -35,11 +35,11 @@ watch(currentWeight, (newCurrentWeight, currentWeight) => {
     message.value = ``;
     return;
   }
-  const difference = newCurrentWeight - currentWeight; 
-  if (difference > 0) {
-     message.value = `You've gained ${difference.toFixed(1)} kg`;
+   difference.value = newCurrentWeight - currentWeight; 
+  if (difference.value > 0) {
+     message.value = `You've gained ${difference.value.toFixed(1)} kg`;
   } else {
-     message.value = `You've lost ${-difference} kg`;
+     message.value = `You've lost ${-difference.value} kg`;
   }
   localStorage.setItem('message', message.value);
 })
@@ -95,7 +95,10 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
       easing="linear"
 />
 
-    <h4 class="text-center text-lg mb-4 text-gray-600" v-if="message">{{ message }}</h4>
+    <h4 
+      class="text-center text-lg mb-4 text-gray-600"
+      v-if="message"
+      :class="difference < 0 ? 'text-green-400' : 'text-red-400' ">{{ message }}</h4>
 
     <form class="flex flex-col gap-4" @submit.prevent="submitForm">
       <input step="0.1" 
