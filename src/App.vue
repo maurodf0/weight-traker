@@ -7,6 +7,7 @@
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
   const difference = ref<number | null>(null)
+  const sortedWeight = ref<Array<{ weight: number, date: Date }>>([])
 
 
 onMounted(() => {
@@ -71,6 +72,11 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    weightInput.value = null;
  }
 
+ sortedWeight.value = [...allWeights.value].sort((a, b) => b.date.getTime() - a.date.getTime())
+
+ console.log(sortedWeight.value)
+ console.log(allWeights)
+
   const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
  }
@@ -116,14 +122,14 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
       <canvas ref="chart"></canvas>
     </div>
 
-    <div v-if="allWeights.length > 0" class="mt-6">
+    <div v-if="sortedWeight.length > 0" class="mt-6">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
         <h5 class="text-gray-500 italic px-4 py-2 rounded">Latest</h5>
       </div>
       <ul v-auto-animate>
         <li class="flex justify-between items-center bg-gray-100 even:bg-gray-200 py-2 px-4 rounded mb-2"
-            v-for="w in allWeights.slice(-7)"
+            v-for="w in sortedWeight.slice(-7)"
             :key="w.date.toString()">
           <span>{{ w.weight }} <span class="text-sm">Kg</span> - 
             <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
