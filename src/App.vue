@@ -1,7 +1,7 @@
 <script setup lang="ts">
  import { ref, watch, onMounted, computed  } from 'vue'
  import Chart from 'chart.js/auto';
- import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+
  import NumberAnimation from "vue-number-animation";
 
   const chart = ref<HTMLCanvasElement | null>(null)
@@ -83,9 +83,6 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
 
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
-    <!-- <h1 class="my-4 text-4xl font-bold text-center text-blue-600">
-      {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">kg</span>
-    </h1> -->
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
@@ -133,12 +130,12 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
           <span>{{ w.weight }} <span class="text-sm">Kg</span> - 
             <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
           </span>
-          <span v-auto-animate @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span>
+          <span @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span>
         </li>
       </ul>
     </div>
 
-    <div v-auto-animate v-else class="mt-6">
+    <div  v-else class="mt-6">
       <p class="text-center text-gray-500">No weights yet. Add your first weight and start your journey.</p>
     </div>
   </div>
