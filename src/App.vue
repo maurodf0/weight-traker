@@ -77,10 +77,14 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    allWeights.value.push(newWeight)
    currentWeight.value = sortedWeight.value[0].weight
    weightInput.value = null;
+
+   renderChart();
  }
 
   const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
+
+  renderChart();
  }
 
 
@@ -121,6 +125,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
   });
 };
 
+renderChart();
 
 </script>
 
