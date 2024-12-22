@@ -1,6 +1,6 @@
 <script setup lang="ts">
  import { ref, watch, onMounted, computed  } from 'vue'
- import Chart from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
  import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
  import NumberAnimation from "vue-number-animation";
 
