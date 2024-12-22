@@ -7,7 +7,6 @@
   const chart = ref<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
   const difference = ref<number | null>(null)
-  const sortedWeight = ref<Array<{ weight: number, date: Date }>>([])
 
 
 onMounted(() => {
@@ -72,10 +71,12 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
    weightInput.value = null;
  }
 
- sortedWeight.value = [...allWeights.value].sort((a, b) => b.date.getTime() - a.date.getTime())
+const sortedWeight = computed(() => {
+  return [...allWeights.value].sort((a, b) => b.date.getTime() - a.date.getTime());
+});
 
  console.log(sortedWeight.value)
- console.log(allWeights)
+ console.log(allWeights.value)
 
   const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
