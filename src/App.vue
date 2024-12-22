@@ -66,7 +66,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
      weight: weightInput.value,
      date: new Date
    }
-   allWeights.value.unshift(newWeight)
+   allWeights.value.push(newWeight)
    currentWeight.value = allWeights.value[0].weight
    weightInput.value = null;
  }
