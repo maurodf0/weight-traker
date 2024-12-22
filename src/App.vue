@@ -1,10 +1,9 @@
 <script setup lang="ts">
- import { ref, watch, onMounted, computed  } from 'vue'
+ import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
  import Chart from 'chart.js/auto';
-
  import NumberAnimation from "vue-number-animation";
 
-  const chart = ref<HTMLCanvasElement | null>(null)
+  const weightChart = shallowRef<HTMLCanvasElement | null>(null)
   const message = ref<string | null>(null)
   const difference = ref<number | null>(null)
 
@@ -47,6 +46,10 @@ watch(currentWeight, (newCurrentWeight, currentWeight) => {
      message.value = `You've lost ${-difference.value} kg`;
   }
   localStorage.setItem('message', message.value);
+
+  nextTick(() => {
+    weightChart.valie
+  })
 })
 
  watch(allWeights, () => {
@@ -115,7 +118,8 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
     </form>
 
     <div class="chartContainer mt-6" v-if="allWeights.length > 0">
-      <canvas ref="chart"></canvas>
+      <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
+      <canvas ref="weightChart"></canvas>
     </div>
 
     <div v-if="sortedWeight.length > 0" class="mt-6">
