@@ -82,15 +82,17 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
       {{ allWeights.length === 0 ? 0 : currentWeight }} <span class="text-sm">kg</span>
     </h1> -->
 
-    <NumberAnimation class="text-center text-4xl font-bold text-blue-600"
-    ref="currentWeight"
-	:from="0"
-  tag="h1"
-	:to="currentWeight"
-	:format="weight => weight.toFixed(1) + ' kg'"
-	:duration=".5"
-	autoplay
-    easing="linear"
+    <NumberAnimation 
+      class="text-center text-4xl font-bold text-blue-600"
+      :class="!message ? 'my-4' : 'my-0' "
+      ref="currentWeight"
+      :from="0"
+      tag="h1"
+      :to="currentWeight"
+      :format="weight => weight.toFixed(1) + ' kg'"
+      :duration=".5"
+      autoplay
+      easing="linear"
 />
 
     <h4 class="text-center text-lg mb-4 text-gray-600" v-if="message">{{ message }}</h4>
