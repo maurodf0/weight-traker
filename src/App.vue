@@ -22,6 +22,10 @@ onMounted(() => {
   if(storedeMessage) {
     message.value = storedeMessage
   }
+  // const storedChart = localStorage.getItem('chart')
+  // if(storedChart) {
+  //   weightChart.value = storedChart
+  // }
 })
 
  const weightInput = ref<number | null>(null)
@@ -59,31 +63,45 @@ if (weightChart.value && weightChart.value.data && weightChart.value.data.datase
 }
 
 
-  nextTick(() => {
-    weightChart.value = new Chart(weightChartEl.value.getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: allWeights.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)),
-        datasets: [{
-          label: 'Weight',
-          data: allWeights.value.map(w => w.weight),
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          pointBackgroundColor: 'rgb(75, 192, 192)',
-          pointBorderColor: 'rgb(75, 192, 192)',
-          pointHoverBackgroundColor: 'rgb(75, 192, 192)',
-          pointHoverBorderColor: 'rgb(220,220,220)',
-          fill: true,
-
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true
+nextTick(() => {
+  weightChart.value = new Chart(weightChartEl.value.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: allWeights.value
+        .slice()  // Crea una copia dell'array per non modificarlo direttamente
+        .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+        .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+        .slice(0, 7),  // Limita ai 7 valori più recenti
+      datasets: [{
+        label: 'Weight',
+        data: allWeights.value
+          .slice()  // Crea una copia dell'array per non modificarlo direttamente
+          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+          .map(w => w.weight)  // Estrai i valori dei pesi
+          .slice(0, 7),  // Limita ai 7 valori più recenti
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        pointBackgroundColor: 'rgb(75, 192, 192)',
+        pointBorderColor: 'rgb(75, 192, 192)',
+        pointHoverBackgroundColor: 'rgb(75, 192, 192)',
+        pointHoverBorderColor: 'rgb(220,220,220)',
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: {
+          reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
         }
-    });
+      }
+    }
   })
 })
+
+})
+
 
  watch(allWeights, () => {
   localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
