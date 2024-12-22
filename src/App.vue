@@ -4,9 +4,10 @@
  import NumberAnimation from "vue-number-animation";
  import 'chartjs-adapter-date-fns';
 
-  const weightChart = shallowRef<HTMLCanvasElement | null>(null)
+  const weightChart = shallowRef(null)
   const message = ref<string | null>(null)
   const difference = ref<number | null>(null)
+  const weightChartEl = ref<HTMLCanvasElement | null>(null)
 
 
 onMounted(() => {
@@ -48,11 +49,40 @@ watch(currentWeight, (newCurrentWeight, currentWeight) => {
   }
   localStorage.setItem('message', message.value);
 
+if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
+  weightChart.value.data.labels = sortedWeight.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)).slice(0, 7);
+  weightChart.value.data.datasets[0].data = sortedWeight.value.map(w => w.weight).slice(0, 7);
+
+  weightChart.value.update();
+} else {
+  console.error('weightChart structure is not defined as expected', weightChart.value);
+}
+
+
   nextTick(() => {
-    weightChart.value = new Chart(weightChart.value.getContext('2d'), {
+    weightChart.value = new Chart(weightChartEl.value.getContext('2d'), {
       type: 'line',
       data: {
         labels: allWeights.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)),
+        datasets: [{
+          label: 'Weight',
+          data: allWeights.value.map(w => w.weight),
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          pointBackgroundColor: 'rgb(75, 192, 192)',
+          pointBorderColor: 'rgb(75, 192, 192)',
+          pointHoverBackgroundColor: 'rgb(75, 192, 192)',
+          pointHoverBorderColor: 'rgb(220,220,220)',
+          fill: true,
+
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true
+        }
+    });
+  })
 })
 
  watch(allWeights, () => {
@@ -122,7 +152,7 @@ const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "nume
 
     <div class="chartContainer mt-6" v-if="allWeights.length > 0">
       <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
-      <canvas ref="weightChart"></canvas>
+      <canvas ref="weightChartEl"></canvas>
     </div>
 
     <div v-if="sortedWeight.length > 0" class="mt-6">
