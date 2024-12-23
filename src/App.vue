@@ -22,10 +22,10 @@ onMounted(() => {
   if(storedeMessage) {
     message.value = storedeMessage
   }
-  // const storedChart = localStorage.getItem('chart')
-  // if(storedChart) {
-  //   weightChart.value = storedChart
-  // }
+  const storedChartLabels = localStorage.getItem('label')
+  if(storedChart) {
+    storedChartLabels && weightChart.value.data.labels = JSON.parse(storedChartLabels)
+  }
 })
 
  const weightInput = ref<number | null>(null)
