@@ -3,6 +3,7 @@ import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
 import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
+import HeightInput from './components/heightInput.vue'
 
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
@@ -134,10 +135,17 @@ const submitForm = (e: Event) => {
 const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
+
+
+const submitHeight = (height: number) => {
+  console.log(height)
+}
 </script>
 
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
+
+    <HeightInput @heightHandle="submitHeight" />
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
