@@ -105,6 +105,8 @@ nextTick(() => {
 
  watch(allWeights, () => {
   localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
+  localStorage.setItem('label', JSON.stringify(weightChart.value.data.labels))
+  localStorage.setItem('data', JSON.stringify(weightChart.value.data.datasets[0].data))
  }, { deep: true })
 
  // Italian date format
