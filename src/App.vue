@@ -1,39 +1,72 @@
 <script setup lang="ts">
- import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
- import Chart from 'chart.js/auto';
- import NumberAnimation from "vue-number-animation";
- import 'chartjs-adapter-date-fns';
+import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
+import Chart from 'chart.js/auto';
+import NumberAnimation from "vue-number-animation";
+import 'chartjs-adapter-date-fns';
 
-  const weightChart = shallowRef(null)
-  const message = ref<string | null>(null)
-  const difference = ref<number | null>(null)
-  const weightChartEl = ref<HTMLCanvasElement | null>(null)
+const weightChart = shallowRef(null)
+const message = ref<string | null>(null)
+const difference = ref<number | null>(null)
+const weightChartEl = ref<HTMLCanvasElement | null>(null)
 
+const weightInput = ref<number | null>(null)
+const allWeights = ref<Array<{ weight: number, date: Date }>>([])
+
+// Italian date format
+const localeIT = "it-IT"
+const optionsIT = { weekday: "short", year: "numeric", month: "short", day: "numeric" }
 
 onMounted(() => {
   const storedWeights = localStorage.getItem('allWeights')
-  if(storedWeights) {
-   allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
+  if (storedWeights) {
+    allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
       weight: w.weight,
       date: new Date(w.date)
     }));
   }
-  const storedeMessage = localStorage.getItem('message')
-  if(storedeMessage) {
-    message.value = storedeMessage
-  }
-  const storedChartLabels = localStorage.getItem('label')
-  if(storedChart) {
-    storedChartLabels && weightChart.value.data.labels = JSON.parse(storedChartLabels)
 
-    const storedChartData = localStorage.getItem('data')
-    storedChartData && weightChart.value.data.datasets[0].data = JSON.parse(storedChartData)
+  const storedMessage = localStorage.getItem('message')
+  if (storedMessage) {
+    message.value = storedMessage
   }
+
+  nextTick(() => {
+    weightChart.value = new Chart(weightChartEl.value!.getContext('2d')!, {
+      type: 'line',
+      data: {
+        labels: allWeights.value
+          .slice()  // Crea una copia dell'array per non modificarlo direttamente
+          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+          .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+          .slice(0, 7),  // Limita ai 7 valori più recenti
+        datasets: [{
+          label: 'Weight',
+          data: allWeights.value
+            .slice()  // Crea una copia dell'array per non modificarlo direttamente
+            .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+            .map(w => w.weight)  // Estrai i valori dei pesi
+            .slice(0, 7),  // Limita ai 7 valori più recenti
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          pointBackgroundColor: 'rgb(75, 192, 192)',
+          pointBorderColor: 'rgb(75, 192, 192)',
+          pointHoverBackgroundColor: 'rgb(75, 192, 192)',
+          pointHoverBorderColor: 'rgb(220,220,220)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          x: {
+            reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
+          }
+        }
+      }
+    })
+  })
 })
-
- const weightInput = ref<number | null>(null)
- const allWeights = ref<Array<{ weight: number, date: Date }>>([])
-
 
 const sortedWeight = computed(() => {
   return [...allWeights.value].sort((a, b) => b.date.getTime() - a.date.getTime());
@@ -44,100 +77,52 @@ const currentWeight = computed(() => {
 });
 
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
-  if(currentWeight == 0 || newCurrentWeight == 0) {
+  if (currentWeight == 0 || newCurrentWeight == 0) {
     message.value = ``;
     return;
   }
-   difference.value = newCurrentWeight - currentWeight; 
+  difference.value = newCurrentWeight - currentWeight;
   if (difference.value > 0) {
-     message.value = `You've gained ${difference.value.toFixed(1)} kg`;
+    message.value = `You've gained ${difference.value.toFixed(1)} kg`;
   } else {
-     message.value = `You've lost ${-difference.value} kg`;
+    message.value = `You've lost ${-difference.value} kg`;
   }
   localStorage.setItem('message', message.value);
+});
 
-if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
-  weightChart.value.data.labels = sortedWeight.value.map(w => w.date.toLocaleDateString(localeIT, optionsIT)).slice(0, 7);
-  weightChart.value.data.datasets[0].data = sortedWeight.value.map(w => w.weight).slice(0, 7);
+watch(allWeights, (newWeights) => {
+  localStorage.setItem('allWeights', JSON.stringify(newWeights));
 
-  weightChart.value.update();
-} else {
-  console.error('weightChart structure is not defined as expected', weightChart.value);
+  if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
+    weightChart.value.data.labels = newWeights.map(w => w.date.toLocaleDateString(localeIT, optionsIT)).slice(0, 7);
+    weightChart.value.data.datasets[0].data = newWeights.map(w => w.weight).slice(0, 7);
+    weightChart.value.update();
+  } else {
+    console.error('weightChart structure is not defined as expected', weightChart.value);
+  }
+}, { deep: true })
+
+const submitForm = (e: Event) => {
+  if (!weightInput.value) {
+    alert('Please enter a weight')
+    weightInput.value = null;
+    return;
+  } else if (weightInput.value < 0) {
+    alert('Weight cannot be negative')
+    weightInput.value = null;
+    return;
+  }
+  let newWeight = {
+    weight: weightInput.value,
+    date: new Date()
+  }
+  allWeights.value.push(newWeight)
+  weightInput.value = null;
 }
 
-
-nextTick(() => {
-  weightChart.value = new Chart(weightChartEl.value.getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: allWeights.value
-        .slice()  // Crea una copia dell'array per non modificarlo direttamente
-        .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-        .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
-        .slice(0, 7),  // Limita ai 7 valori più recenti
-      datasets: [{
-        label: 'Weight',
-        data: allWeights.value
-          .slice()  // Crea una copia dell'array per non modificarlo direttamente
-          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-          .map(w => w.weight)  // Estrai i valori dei pesi
-          .slice(0, 7),  // Limita ai 7 valori più recenti
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        pointBackgroundColor: 'rgb(75, 192, 192)',
-        pointBorderColor: 'rgb(75, 192, 192)',
-        pointHoverBackgroundColor: 'rgb(75, 192, 192)',
-        pointHoverBorderColor: 'rgb(220,220,220)',
-        fill: true,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      scales: {
-        x: {
-          reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
-        }
-      }
-    }
-  })
-})
-
-})
-
-
- watch(allWeights, () => {
-  localStorage.setItem('allWeights', JSON.stringify(allWeights.value))
-  localStorage.setItem('label', JSON.stringify(weightChart.value.data.labels))
-  localStorage.setItem('data', JSON.stringify(weightChart.value.data.datasets[0].data))
- }, { deep: true })
-
- // Italian date format
-const localeIT = "it-IT"
-const optionsIT = { weekday:"short", year: "numeric", month: "short", day: "numeric" }
-
- const submitForm = (e: Event) => {
-   if(!weightInput.value) {
-     alert('Please enter a weight')
-      weightInput.value = null;
-    return;
-   } else if(weightInput.value < 0) {
-     alert('Weight cannot be negative')
-      weightInput.value = null;
-     return;
-   }
-   let newWeight = {
-     weight: weightInput.value,
-     date: new Date
-   }
-   allWeights.value.push(newWeight)
-   currentWeight.value = sortedWeight.value[0].weight
-   weightInput.value = null;
- }
-
-  const handleDelete = (date: Date) => {
+const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
- }
+}
 </script>
 
 <template>
