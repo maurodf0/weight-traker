@@ -94,8 +94,18 @@ watch(allWeights, (newWeights) => {
   localStorage.setItem('allWeights', JSON.stringify(newWeights));
 
   if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
-    weightChart.value.data.labels = newWeights.map(w => w.date.toLocaleDateString(localeIT, optionsIT)).slice(0, 7);
-    weightChart.value.data.datasets[0].data = newWeights.map(w => w.weight).slice(0, 7);
+    weightChart.value.data.labels = newWeights
+      .slice()  // Crea una copia dell'array per non modificarlo direttamente
+      .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+      .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+      .slice(0, 7);  // Limita ai 7 valori più recenti
+
+    weightChart.value.data.datasets[0].data = newWeights
+      .slice()  // Crea una copia dell'array per non modificarlo direttamente
+      .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+      .map(w => w.weight)  // Estrai i valori dei pesi
+      .slice(0, 7);  // Limita ai 7 valori più recenti
+
     weightChart.value.options.scales.x.reverse = true;  // Assicura che i valori recenti siano sulla destra
     weightChart.value.update();
   } else {
