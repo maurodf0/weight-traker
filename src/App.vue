@@ -96,6 +96,7 @@ watch(allWeights, (newWeights) => {
   if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
     weightChart.value.data.labels = newWeights.map(w => w.date.toLocaleDateString(localeIT, optionsIT)).slice(0, 7);
     weightChart.value.data.datasets[0].data = newWeights.map(w => w.weight).slice(0, 7);
+    weightChart.value.options.scales.x.reverse = true;  // Assicura che i valori recenti siano sulla destra
     weightChart.value.update();
   } else {
     console.error('weightChart structure is not defined as expected', weightChart.value);
