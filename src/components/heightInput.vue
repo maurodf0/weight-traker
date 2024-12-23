@@ -13,10 +13,6 @@ const heightHandle = (e: Event) => {
     heightInput.value = null;
     return;
   }
-  let newHeight = {
-    height: heightInput.value,
-    date: new Date()
-  }
 
 }
 
@@ -32,7 +28,7 @@ const heightHandle = (e: Event) => {
            type="number"
            id="height" 
            v-model="heightInput"
-           placeholder="Enter your height">
+           placeholder="Enter your height in cm">
     <button class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600" type="submit">
       Submit
     </button>
