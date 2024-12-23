@@ -78,7 +78,7 @@ const currentWeight = computed(() => {
 });
 
 const BMI = computed(() => {
-  return currentWeight.value / () 72 kg / (1.65 x 1.65) 
+  return currentWeight.value / (1.75 * 1.75);
 });
 
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
@@ -128,6 +128,10 @@ const submitForm = (e: Event) => {
 
 const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
+}
+
+const SubmitHeight = (height: number) => {
+  console.log(height)
 }
 </script>
 

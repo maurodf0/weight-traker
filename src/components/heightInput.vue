@@ -3,9 +3,15 @@ import { ref } from 'vue'
 
 const heightInput = ref<number | null>(null)
 
-defineEmits(['heightHandle'])
+const emit = defineEmits(['heightHandle'])
 
+const heightHandle = () => {
+  if (heightInput.value) {
+    emit('heightHandle', heightInput.value)
+  }
+}
 </script>
+
 
 <template>
   <form class="flex flex-col gap-4" @submit.prevent="heightHandle">
