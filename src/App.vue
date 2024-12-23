@@ -130,8 +130,8 @@ const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
 
-const SubmitHeight = (height: number) => {
-  console.log(height)
+const SubmitHeight = (heightValue: number) => {
+  height.value = heightValue;
 }
 </script>
 
