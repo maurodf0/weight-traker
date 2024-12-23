@@ -25,6 +25,9 @@ onMounted(() => {
   const storedChartLabels = localStorage.getItem('label')
   if(storedChart) {
     storedChartLabels && weightChart.value.data.labels = JSON.parse(storedChartLabels)
+
+    const storedChartData = localStorage.getItem('data')
+    storedChartData && weightChart.value.data.datasets[0].data = JSON.parse(storedChartData)
   }
 })
 
