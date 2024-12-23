@@ -3,21 +3,7 @@ import { ref } from 'vue'
 
 const heightInput = ref<number | null>(null)
 
-const heightHandle = (e: Event) => {
-  if (!heightInput.value) {
-    alert('Please enter a height')
-    heightInput.value = null;
-    return;
-  } else if (heightInput.value < 0) {
-    alert('Height cannot be negative')
-    heightInput.value = null;
-    return;
-  }
-
-}
-
-
-
+defineEmits(['heightHandle'])
 
 </script>
 

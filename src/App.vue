@@ -77,6 +77,10 @@ const currentWeight = computed(() => {
   return sortedWeight.value.length > 0 ? sortedWeight.value[0].weight : 0;
 });
 
+const BMI = computed(() => {
+  return currentWeight.value / () 72 kg / (1.65 x 1.65) 
+});
+
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
   if (currentWeight == 0 || newCurrentWeight == 0) {
     message.value = ``;
@@ -130,7 +134,7 @@ const handleDelete = (date: Date) => {
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
 
-    <HeightInput />
+    <HeightInput @heightHandle="SubmitHeight" />
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
