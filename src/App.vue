@@ -148,10 +148,26 @@ const heightinMeters = computed(() => {
 // Computed property per calcolare il BMI
 const BMI = computed(() => {
   if (height.value) {
-    console.log( currentWeight.value / (heightinMeters.value * heightinMeters.value) )
+   return currentWeight.value / (heightinMeters.value * heightinMeters.value) 
   }
   return null
 })
+
+const BMIMessage = computed(() => {
+  if (BMI.value) {
+    if (BMI.value < 18.5) {
+      return 'You are Underweight'
+    } else if (BMI.value < 25) {
+      return 'You are Normal'
+    } else if (BMI.value < 30) {
+      return 'You are Overweight'
+    } else {
+      return 'You are Obese'
+    }
+  }
+  return null
+})
+
 </script>
 
 <template>
@@ -159,7 +175,7 @@ const BMI = computed(() => {
 
     <HeightInput @heightHandle="submitHeight" />
 
-    {{ BMI }}
+    {{ BMIMessage }}
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
