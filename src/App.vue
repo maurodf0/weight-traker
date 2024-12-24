@@ -173,10 +173,6 @@ const BMIMessage = computed(() => {
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
 
-    <HeightInput @heightHandle="submitHeight" />
-
-    {{ BMIMessage }}
-
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
       :class="!message ? 'my-4' : 'my-0' "
@@ -227,11 +223,21 @@ const BMIMessage = computed(() => {
           <span @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span>
         </li>
       </ul>
+
+
+
+   <HeightInput class="mt-10" @heightHandle="submitHeight" />
+
+    <h4 class="text-2xl font-bold text-center text-gray-600">{{ BMIMessage }}</h4>
+
     </div>
 
     <div  v-else class="mt-6">
       <p class="text-center text-gray-500">No weights yet. Add your first weight and start your journey.</p>
     </div>
   </div>
+
+
+
 </template>
 
