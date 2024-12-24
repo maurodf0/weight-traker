@@ -5,11 +5,12 @@ import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
 import HeightInput from './components/heightInput.vue'
 
+
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
 const weightChartEl = ref<HTMLCanvasElement | null>(null)
-
+const height = ref<number | null>(null)
 const weightInput = ref<number | null>(null)
 const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
@@ -136,16 +137,25 @@ const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
 
-
-const submitHeight = (height: number) => {
-  console.log(height)
+const submitHeight = (newHeight: number) => {
+  height.value = newHeight
 }
+
+// Computed property per calcolare il BMI
+const BMI = computed(() => {
+  if (height.value) {
+    return currentWeight.value / (height.value * height.value)
+  }
+  return null
+})
 </script>
 
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
 
     <HeightInput @heightHandle="submitHeight" />
+
+    {{ BMI }}
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
