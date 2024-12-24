@@ -136,15 +136,19 @@ const submitForm = (e: Event) => {
 const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
-
 const submitHeight = (newHeight: number) => {
   height.value = newHeight
 }
 
+const heightinMeters = computed(() => {
+  return height.value / 100
+})
+
+
 // Computed property per calcolare il BMI
 const BMI = computed(() => {
   if (height.value) {
-    return currentWeight.value / (height.value * height.value)
+    console.log( currentWeight.value / (heightinMeters.value * heightinMeters.value) )
   }
   return null
 })
