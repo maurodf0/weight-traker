@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
+import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-  <RouterView />
+   <main class="bg-orange-50 min-h-screen p-6">
+    <AppHeader />
+    <RouterView />
+  </main>
 </template>
