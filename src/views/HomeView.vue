@@ -202,31 +202,25 @@ const BMIMessage = computed(() => {
     </form>
 
     <div class="chartContainer mt-6" v-if="allWeights.length > 0">
-      <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
+      <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Weights History</h2>
       <canvas ref="weightChartEl"></canvas>
     </div>
 
     <div v-if="sortedWeight.length > 0" class="mt-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold text-gray-700">Weights History</h2>
+        <h2 class="text-xl font-semibold text-gray-700  dark:text-white">Weights History</h2>
         <h5 class="text-gray-500 italic px-4 py-2 rounded">Latest</h5>
       </div>
       <ul v-auto-animate>
-        <li class="flex justify-between items-center bg-gray-100 even:bg-gray-200 py-2 px-4 rounded mb-2"
+        <li class="flex justify-between items-center bg-gray-100 dark:bg-gray-500 dark:even:bg-gray-600 even:bg-gray-200 py-2 px-4 rounded mb-2"
             v-for="w in sortedWeight.slice(0, 7)"
             :key="w.date.toString()">
           <span>{{ w.weight }} <span class="text-sm">Kg</span> - 
-            <span class="text-sm text-gray-500">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{ w.date.toLocaleDateString(localeIT, optionsIT) }}</span>
           </span>
           <span @click="handleDelete(w.date)" class="text-red-600 cursor-pointer">X</span>
         </li>
-      </ul>
-
-
-
-   <HeightInput class="mt-10" @heightHandle="submitHeight" />
-
-    <h4 class="text-2xl font-bold text-center text-gray-600">{{ BMIMessage }}</h4>
+    </ul>
 
     </div>
 
