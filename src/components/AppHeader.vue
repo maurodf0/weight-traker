@@ -5,7 +5,7 @@
 
 <template>
 
-    <header class="bg-white shadow-md">
+    <header class="max-w-md mx-auto bg-white p-4 rounded-lg bg-slate-300">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center border-b-2 border-gray-100 mb-6 pb-6">
                 <div class="flex items-center">

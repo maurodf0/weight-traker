@@ -3,7 +3,7 @@ import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
 import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
-import HeightInput from './components/heightInput.vue'
+import HeightInput from '../components/heightInput.vue'
 
 
 

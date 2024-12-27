@@ -4,8 +4,9 @@ import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-   <main class="bg-orange-50 min-h-screen p-6">
+   
     <AppHeader />
+  <main>
     <RouterView />
   </main>
 </template>
