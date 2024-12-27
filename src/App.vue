@@ -21,4 +21,11 @@ import AppHeader from './components/AppHeader.vue'
     background-color: #1a202c;
   }
 
+  .dark main p {
+    color: #f3f4f6;
+  }
+
+  h1 {
+    @apply text-3xl font-bold dark:text-white
+  }
   </style>
