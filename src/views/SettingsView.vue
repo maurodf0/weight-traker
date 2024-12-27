@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
 import { ref, computed } from 'vue'
+import useHeight from '@/composables/useHeight'
+import HeightInput from '@/components/heightInput.vue'
 
 const mode = useColorMode() // Ref<'dark' | 'light'>
 
@@ -9,6 +11,7 @@ const toggleMode = () => {
   mode.value = mode.value === 'dark' ? 'light' : 'dark'
 }
 
+const  { height, submitHeight } = useHeight()
 
 </script>
 
@@ -22,8 +25,7 @@ const toggleMode = () => {
     </button>
 
     <h2>Height</h2>
-       <HeightInput class="mt-10" @heightHandle="submitHeight" />
-    <h4 class="text-2xl font-bold text-center text-gray-600">{{ BMIMessage }}</h4>
+    <HeightInput class="mt-10" @heightHandle="submitHeight" />
 
   </div>
 </template>

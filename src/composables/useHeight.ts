@@ -1,4 +1,4 @@
-import { ref, watch, reactive, onMounted } from 'vue';
+import { ref, watch, onMounted, computed } from 'vue';
 
 export default function useHeight() {
 
