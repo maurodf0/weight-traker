@@ -14,8 +14,9 @@
                 </div>
                 <div class="flex items-center gap-x-4">
                     <RouterLink to="/" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">Home</RouterLink>
-                    <RouterLink to="/about" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">About</RouterLink>
-                    <RouterLink to="/contact" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">Contact</RouterLink>                   
+                    <RouterLink to="/bmi" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">BMI</RouterLink>                   
+                    <RouterLink to="/tdee" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">Calculate TDEE</RouterLink>
+                    <RouterLink to="/settings" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">Settings</RouterLink>
                 </div>
             </div>
         </div>

@@ -172,9 +172,7 @@ const BMIMessage = computed(() => {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
-
-    <NumberAnimation 
+    <div>    <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
       :class="!message ? 'my-4' : 'my-0' "
       ref="currentWeight"
@@ -236,7 +234,8 @@ const BMIMessage = computed(() => {
     <div  v-else class="mt-6">
       <p class="text-center text-gray-500">No weights yet. Add your first weight and start your journey.</p>
     </div>
-  </div>
+
+</div>
 
 
 

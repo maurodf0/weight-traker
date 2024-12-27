@@ -4,9 +4,10 @@ import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-   
-    <AppHeader />
+  <AppHeader />
   <main>
-    <RouterView />
+    <section class="max-w-md mx-auto bg-white p-4 rounded-lg">
+      <RouterView />
+    </section>
   </main>
 </template>
