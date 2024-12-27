@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
 import HeightInput from './components/heightInput.vue'
-import AppHeader from './components/AppHeader.vue'
+
 
 
 const weightChart = shallowRef(null)
@@ -173,7 +173,6 @@ const BMIMessage = computed(() => {
 
 <template>
   <div class="max-w-md mx-auto bg-white p-4 rounded-lg">
-    <AppHeader />
 
     <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
