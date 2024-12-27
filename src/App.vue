@@ -6,7 +6,7 @@ import AppHeader from './components/AppHeader.vue'
 <template>
   <AppHeader />
   <main>
-    <section class="max-w-md mx-auto bg-white p-4 rounded-lg">
+    <section class="max-w-md mx-auto bg-white dark:bg-gray-800 p-4 rounded-lg">
       <RouterView />
     </section>
   </main>
