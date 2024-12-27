@@ -11,3 +11,14 @@ import AppHeader from './components/AppHeader.vue'
     </section>
   </main>
 </template>
+
+<style>
+  body {
+    background-color: #f3f4f6;
+  }
+
+  .dark body {
+    background-color: #1a202c;
+  }
+
+  </style>
