@@ -2,8 +2,8 @@
   <div>
     <h1>Settings</h1>
     <p>Current Mode: {{ mode.value }}</p>
-    <button @click="toggleMode">
-      Toggle Mode
+    <button class="bg-slate-600 my-4 text-white py-2 px-4 rounded-lg" @click="toggleMode">
+      Change Color Mode, current mode: {{ mode.value }}
     </button>
   </div>
 </template>
