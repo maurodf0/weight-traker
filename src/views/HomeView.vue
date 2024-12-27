@@ -137,7 +137,6 @@ const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
 
-
 </script>
 
 <template>
