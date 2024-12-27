@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import useHeight from '@/composables/useHeight'
+import { computed } from 'vue'
+const { height, heightinMeters } = useHeight()
 
 // Computed property per calcolare il BMI
 const BMI = computed(() => {
@@ -24,12 +26,12 @@ const BMIMessage = computed(() => {
   return null
 })
 
-const heightinMeters = useHeight();
 
 </script>
 
 <template>
     <div>
         <h1>BMI</h1>
+        <p>Your BMI is: {{ BMIMessage }}</p>
     </div>
 </template>

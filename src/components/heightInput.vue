@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import useHeight from '@/composables/useHeight'
+
+const { height } = useHeight()
 
 const heightInput = ref<number | null>(null)
 
@@ -13,7 +16,7 @@ defineEmits(['heightHandle'])
            class="px-4 py-2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg"
            type="number"
            id="height" 
-           v-model="heightInput"
+           v-model="height"
            placeholder="Enter your height in cm">
     <button class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600" type="submit">
       Submit

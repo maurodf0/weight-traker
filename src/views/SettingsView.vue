@@ -13,6 +13,8 @@ const toggleMode = () => {
 
 const  { height, submitHeight } = useHeight()
 
+
+
 </script>
 
 
@@ -23,9 +25,8 @@ const  { height, submitHeight } = useHeight()
     <button class="bg-slate-600 my-4 text-white py-2 px-4 rounded-lg" @click="toggleMode">
       Change Color Mode, current mode: {{ mode.value }}
     </button>
-
-    <h2>Height</h2>
-    <HeightInput class="mt-10" @heightHandle="submitHeight" />
+    <h2 class="text-2xl font-bold dark:text-white">Height</h2>
+    <HeightInput v-model="height" class="mt-10" @heightHandle="submitHeight" />
 
   </div>
 </template>
