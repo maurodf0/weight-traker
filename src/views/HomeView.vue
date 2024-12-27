@@ -6,7 +6,6 @@ import 'chartjs-adapter-date-fns';
 import HeightInput from '../components/heightInput.vue'
 
 
-
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
