@@ -2,10 +2,7 @@ import { ref, watch, reactive, onMounted } from 'vue';
 
 export default function useHeight() {
 
-    
     const height = ref<number>(0);
-    
-
 
     const submitHeight = (newHeight: number) => {
         height.value = newHeight
@@ -15,7 +12,6 @@ export default function useHeight() {
     })
 
         watch(heightinMeters, () => {
-        console.log('height changed')
         localStorage.setItem('height', heightinMeters.value.toString())
     })
     
@@ -28,6 +24,7 @@ export default function useHeight() {
 
     return {
         height,
+        submitHeight
     }
 
 }
