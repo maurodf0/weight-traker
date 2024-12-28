@@ -3,14 +3,12 @@ import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
 import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
-import HeightInput from '../components/heightInput.vue'
-
 
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
 const weightChartEl = ref<HTMLCanvasElement | null>(null)
-const height = ref<number | null>(null)
+
 const weightInput = ref<number | null>(null)
 const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
