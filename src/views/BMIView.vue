@@ -25,7 +25,7 @@ const currentWeight = computed(() => {
 // Computed property per calcolare il BMI
 const BMI = computed(() => {
   if (height.value) {
-   return currentWeight.value / (heightinMeters.value * heightinMeters.value) 
+   return (currentWeight.value / (heightinMeters.value * heightinMeters.value)).toFixed(2) 
   }
   return null
 })
@@ -51,6 +51,7 @@ const BMIMessage = computed(() => {
 <template>
     <div>
         <h1>BMI</h1>
-        <p>Your BMI is: {{ BMIMessage }}</p>
+        <p>Your BMI is: {{ BMI }} </p>
+        <p>{{ BMIMessage }}</p>
     </div>
 </template>
