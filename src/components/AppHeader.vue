@@ -5,7 +5,7 @@
 
 <template>
 
-    <header class="max-w-md mx-auto my-3 bg-white dark:bg-slate-900 p-4 rounded-lg bg-slate-300">
+    <header class="max-w-md mx-auto my-3 bg-white dark:bg-slate-800 p-4 rounded-lg bg-slate-300">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                    <RouterLink to="/"><span class="ml-3 text-xl font-bold text-gray-900 dark:text-white">Weight Traker</span> </RouterLink> 

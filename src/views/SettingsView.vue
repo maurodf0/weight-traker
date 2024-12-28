@@ -24,9 +24,8 @@ const  { height, submitHeight } = useHeight()
 
       <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
         <h2 class="text-2xl font-bold dark:text-white">Dark/Light Mode</h2>
-        <p>Current Mode: {{ mode.value }}</p>
         <button class="bg-slate-600 my-4 text-white py-2 px-4 rounded-lg" @click="toggleMode">
-        Change Color Mode, current mode: {{ mode.value }}
+        Change Color Mode, current mode: {{ mode }}
         </button>
     </section>
 
