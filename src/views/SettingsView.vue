@@ -3,6 +3,8 @@ import { useColorMode } from '@vueuse/core'
 import { ref, computed } from 'vue'
 import useHeight from '@/composables/useHeight'
 import HeightInput from '@/components/heightInput.vue'
+import useSex from '@/composables/useSex'
+
 
 const mode = useColorMode() // Ref<'dark' | 'light'>
 
@@ -13,7 +15,7 @@ const toggleMode = () => {
 
 const  { height, submitHeight } = useHeight()
 
-
+const { sex } = useSex()
 
 </script>
 
@@ -22,19 +24,37 @@ const  { height, submitHeight } = useHeight()
   <div>
       <h1>Settings</h1>
 
+           <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
+        <h2 class="text-2xl font-bold dark:text-white">Sex</h2>
+        <p> Insert your sex for BMI and TDEE calculations</p>
+        <div class="flex gap-4"> 
+          <div class="input">
+            <input type="radio" id="male" value="male" v-model="sex" class="mr-2">
+            <label class=" dark:text-white" for="male">Male</label>
+          </div>
+          <div class="input">
+            <input type="radio" id="female" value="female" v-model="sex" class="mr-2">
+            <label class="dark:text-white" for="female">Female</label>
+        </div>
+
+        </div>
+       
+      </section>
+
+
+      
+      <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
+        <h2 class="text-2xl font-bold dark:text-white">Height</h2>
+        <p> Insert your height in cm for BMI and TDEE calculations</p>  
+        <HeightInput v-model="height" class="mt-4" @heightHandle="submitHeight" />
+      </section>
+      
       <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
         <h2 class="text-2xl font-bold dark:text-white">Dark/Light Mode</h2>
         <button class="bg-slate-600 my-4 text-white py-2 px-4 rounded-lg" @click="toggleMode">
         Change Color Mode, current mode: {{ mode }}
         </button>
     </section>
-
-    <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
-        <h2 class="text-2xl font-bold dark:text-white">Height</h2>
-        <p> Insert your height in cm for BMI and TDEE calculations</p>  
-        <HeightInput v-model="height" class="mt-4" @heightHandle="submitHeight" />
-    </section>
-
-  </div>
+    </div>
 </template>
 
