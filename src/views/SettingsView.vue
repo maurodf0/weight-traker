@@ -4,6 +4,7 @@ import { ref, computed } from 'vue'
 import useHeight from '@/composables/useHeight'
 import HeightInput from '@/components/heightInput.vue'
 import useSex from '@/composables/useSex'
+import useActivity from '@/composables/useActivity'
 
 
 const mode = useColorMode() // Ref<'dark' | 'light'>
@@ -16,6 +17,8 @@ const toggleMode = () => {
 const  { height, submitHeight } = useHeight()
 
 const { sex } = useSex()
+
+const { activity } = useActivity()  
 
 </script>
 
