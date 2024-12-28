@@ -1,4 +1,4 @@
-import { watch } from "vue"
+import { watch, ref, onMounted } from "vue"
 
 export default function useSex() {
     const sex = ref('male')
