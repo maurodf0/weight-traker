@@ -169,7 +169,7 @@ const handleDelete = (date: Date) => {
     </form>
 
     <div class="chartContainer mt-6" v-if="allWeights.length > 0">
-      <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Weights History</h2>
+      <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Weights Chart</h2>
       <canvas ref="weightChartEl"></canvas>
     </div>
 

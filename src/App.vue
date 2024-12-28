@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import AppHeader from './components/AppHeader.vue'
+import { useColorMode } from '@vueuse/core'
+import { onMounted } from 'vue';
+
+const mode = useColorMode() // Ref<'dark' | 'light'>
+
+onMounted(() => {
+  // Accediamo al mode.value per leggere e modificare la modalità
+  mode.value = mode.value === 'dark' ? 'light' : 'dark'
+})
 </script>
 
 <template>
