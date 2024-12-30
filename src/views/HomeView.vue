@@ -4,6 +4,9 @@ import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
 import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
+import useWeight from '@/composables/useWeight'
+
+const { allWeights, sortedWeight, currentWeight } = useWeight()
 
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
@@ -60,14 +63,6 @@ onMounted(() => {
     })
   })
 })
-
-const sortedWeight = computed(() => {
-  return [...allWeights.value].sort((a, b) => b.date.getTime() - a.date.getTime());
-});
-
-const currentWeight = computed(() => {
-  return sortedWeight.value.length > 0 ? sortedWeight.value[0].weight : 0;
-});
 
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
   if (currentWeight == 0 || newCurrentWeight == 0) {
