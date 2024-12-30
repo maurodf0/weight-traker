@@ -31,19 +31,20 @@ const BMI = computed(() => {
 })
 
 const BMIMessage = computed(() => {
-  if (BMI.value) {
-    if (BMI.value < 18.5) {
-      return 'You are Underweight'
-    } else if (BMI.value < 25) {
-      return 'You are Normal'
-    } else if (BMI.value < 30) {
-      return 'You are Overweight'
+  const bmiNumber = BMI.value ? parseFloat(BMI.value) : null;
+  if (bmiNumber) {
+    if (bmiNumber < 18.5) {
+      return 'You are Underweight';
+    } else if (bmiNumber < 25) {
+      return 'You are Normal';
+    } else if (bmiNumber < 30) {
+      return 'You are Overweight';
     } else {
-      return 'You are Obese'
+      return 'You are Obese';
     }
   }
-  return null
-})
+  return null;
+});
 
 
 </script>
