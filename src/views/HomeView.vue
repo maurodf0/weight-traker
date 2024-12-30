@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import { ref, watch, onMounted, computed, nextTick, shallowRef } from 'vue'
 import Chart from 'chart.js/auto';
@@ -10,20 +11,12 @@ const difference = ref<number | null>(null)
 const weightChartEl = ref<HTMLCanvasElement | null>(null)
 
 const weightInput = ref<number | null>(null)
-const allWeights = ref<Array<{ weight: number, date: Date }>>([])
 
 // Italian date format
 const localeIT = "it-IT"
 const optionsIT = { weekday: "short", year: "numeric", month: "short", day: "numeric" }
 
 onMounted(() => {
-  const storedWeights = localStorage.getItem('allWeights')
-  if (storedWeights) {
-    allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
-      weight: w.weight,
-      date: new Date(w.date)
-    }));
-  }
 
   const storedMessage = localStorage.getItem('message')
   if (storedMessage) {
