@@ -16,11 +16,11 @@ const weightChartEl = ref(null)
 const weightInput = ref<number | null>(null)
 
 // Italian date format
-const localeIT = "it-IT"
+const localeIT = "it-IT";
 const optionsIT: Intl.DateTimeFormatOptions = {
-  weekday: 'short' as 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
+  weekday: 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
   year: 'numeric',
-  month: 'short' as 'short',    // 'short', 'long', 'narrow' sono i valori validi per 'month'
+  month: 'short',    // 'short', 'long', 'narrow' sono i valori validi per 'month'
   day: 'numeric'
 };
 
