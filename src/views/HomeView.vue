@@ -8,19 +8,19 @@ import useWeight from '@/composables/useWeight'
 
 const { allWeights, sortedWeight, currentWeight } = useWeight()
 
-const weightChart = shallowRef(null)
+const weightChart = shallowRef<Chart | null>(null);
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
-const weightChart = shallowRef<Chart | null>(null);
+const weightChartEl = ref(null)
 
 const weightInput = ref<number | null>(null)
 
 // Italian date format
 const localeIT = "it-IT"
 const optionsIT: Intl.DateTimeFormatOptions = {
-  weekday: 'short',  // deve essere uno dei valori "short", "long" o "narrow"
+  weekday: 'short' as 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
   year: 'numeric',
-  month: 'short',    // idem per "short", "long" o "narrow"
+  month: 'short' as 'short',    // 'short', 'long', 'narrow' sono i valori validi per 'month'
   day: 'numeric'
 };
 
