@@ -35,7 +35,13 @@ const BMIMessage = computed(() => {
 <template>
     <div>
         <h1>BMI</h1>
+        <div v-if="BMI">
         <p>Your BMI is: {{ BMI }} </p>
         <p>{{ BMIMessage }}</p>
+        </div>
+
+        <div v-else>
+            <p>Please enter your height and weight to calculate your BMI</p>
+        </div>
     </div>
 </template>
