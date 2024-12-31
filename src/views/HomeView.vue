@@ -137,7 +137,7 @@ const handleDelete = (date: Date) => {
       :from="0"
       tag="h1"
       :to="currentWeight"
-      :format="weight => weight.toFixed(1) + ' kg'"
+      :format="(weight: number) => weight.toFixed(1) + ' kg'"
       :duration=".5"
       autoplay
       easing="linear"
