@@ -17,7 +17,12 @@ const weightInput = ref<number | null>(null)
 
 // Italian date format
 const localeIT = "it-IT"
-const optionsIT = { weekday: "short", year: "numeric", month: "short", day: "numeric" }
+const optionsIT: Intl.DateTimeFormatOptions = {
+  weekday: 'short' as 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
+  year: 'numeric',
+  month: 'short' as 'short',    // 'short', 'long', 'narrow' sono i valori validi per 'month'
+  day: 'numeric'
+};
 
 onMounted(() => {
 
@@ -94,30 +99,29 @@ watch(allWeights, (newWeights) => {
       .map(w => w.weight)  // Estrai i valori dei pesi
       .slice(0, 7);  // Limita ai 7 valori più recenti
 
-    weightChart.value.options.scales.x.reverse = true;  // Assicura che i valori recenti siano sulla destra
     weightChart.value.update();
   } else {
     console.error('weightChart structure is not defined as expected', weightChart.value);
   }
-}, { deep: true })
+}, { deep: true });
 
 const submitForm = (e: Event) => {
-  if (!weightInput.value) {
-    alert('Please enter a weight')
+  if (weightInput.value === null) {
+    alert('Please enter a weight');
     weightInput.value = null;
     return;
   } else if (weightInput.value < 0) {
-    alert('Weight cannot be negative')
+    alert('Weight cannot be negative');
     weightInput.value = null;
     return;
   }
-  let newWeight = {
+  const newWeight = {
     weight: weightInput.value,
     date: new Date()
-  }
-  allWeights.value.push(newWeight)
+  };
+  allWeights.value.push(newWeight);
   weightInput.value = null;
-}
+};
 
 const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
