@@ -11,7 +11,7 @@ const { allWeights, sortedWeight, currentWeight } = useWeight()
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
-const weightChartEl = ref<HTMLCanvasElement | null>(null)
+const weightChartEl = ref(null)
 
 const weightInput = ref<number | null>(null)
 
