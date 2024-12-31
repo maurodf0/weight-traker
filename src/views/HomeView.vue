@@ -16,7 +16,7 @@ const weightChartEl = ref(null)
 const weightInput = ref<number | null>(null)
 
 // Italian date format
-const localeIT = "it-IT";
+const localeIT = "it-IT"
 const optionsIT: Intl.DateTimeFormatOptions = {
   weekday: 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
   year: 'numeric',
@@ -25,51 +25,48 @@ const optionsIT: Intl.DateTimeFormatOptions = {
 };
 
 onMounted(() => {
-
   const storedMessage = localStorage.getItem('message')
   if (storedMessage) {
     message.value = storedMessage
   }
 
   nextTick(() => {
-    if (weightChart.value) {
-      weightChart.value = new Chart(weightChartEl.value!.getContext('2d')!, {
-        type: 'line',
-        data: {
-          labels: allWeights.value
+    weightChart.value = new Chart(weightChartEl.value!.getContext('2d')!, {
+      type: 'line',
+      data: {
+        labels: allWeights.value
+          .slice()  // Crea una copia dell'array per non modificarlo direttamente
+          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+          .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+          .slice(0, 7),  // Limita ai 7 valori più recenti
+        datasets: [{
+          label: 'Weight',
+          data: allWeights.value
             .slice()  // Crea una copia dell'array per non modificarlo direttamente
             .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-            .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+            .map(w => w.weight)  // Estrai i valori dei pesi
             .slice(0, 7),  // Limita ai 7 valori più recenti
-          datasets: [{
-            label: 'Weight',
-            data: allWeights.value
-              .slice()  // Crea una copia dell'array per non modificarlo direttamente
-              .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-              .map(w => w.weight)  // Estrai i valori dei pesi
-              .slice(0, 7),  // Limita ai 7 valori più recenti
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            pointBackgroundColor: 'rgb(75, 192, 192)',
-            pointBorderColor: 'rgb(75, 192, 192)',
-            pointHoverBackgroundColor: 'rgb(75, 192, 192)',
-            pointHoverBorderColor: 'rgb(220,220,220)',
-            fill: true,
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          scales: {
-            x: {
-              reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
-            }
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          pointBackgroundColor: 'rgb(75, 192, 192)',
+          pointBorderColor: 'rgb(75, 192, 192)',
+          pointHoverBackgroundColor: 'rgb(75, 192, 192)',
+          pointHoverBorderColor: 'rgb(220,220,220)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          x: {
+            reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
           }
         }
-      });
-    }
+      }
+    });
   });
-})
+});
 
 watch(currentWeight, (newCurrentWeight, currentWeight) => {
   if (currentWeight == 0 || newCurrentWeight == 0) {
@@ -132,7 +129,8 @@ const handleDelete = (date: Date) => {
 </script>
 
 <template>
-    <div>    <NumberAnimation 
+    <div>    
+      <NumberAnimation 
       class="text-center text-4xl font-bold text-blue-600"
       :class="!message ? 'my-4' : 'my-0' "
       ref="currentWeight"
@@ -143,7 +141,7 @@ const handleDelete = (date: Date) => {
       :duration=".5"
       autoplay
       easing="linear"
-/>
+      />
 
     <h4 
       class="text-center text-lg mb-4 text-gray-600"
