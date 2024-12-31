@@ -35,6 +35,6 @@ onMounted(() => {
   }
 
   h1 {
-    @apply text-3xl font-bold dark:text-white
+    @apply text-3xl font-bold dark:text-white mb-4
   }
   </style>

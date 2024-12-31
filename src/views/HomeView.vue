@@ -30,62 +30,57 @@ onMounted(() => {
     message.value = storedMessage
   }
 
-  nextTick(() => {
-    weightChart.value = new Chart(weightChartEl.value!.getContext('2d')!, {
-      type: 'line',
-      data: {
-        labels: allWeights.value
-          .slice()  // Crea una copia dell'array per non modificarlo direttamente
-          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-          .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
-          .slice(0, 7),  // Limita ai 7 valori più recenti
-        datasets: [{
-          label: 'Weight',
-          data: allWeights.value
-            .slice()  // Crea una copia dell'array per non modificarlo direttamente
-            .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
-            .map(w => w.weight)  // Estrai i valori dei pesi
-            .slice(0, 7),  // Limita ai 7 valori più recenti
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          pointBackgroundColor: 'rgb(75, 192, 192)',
-          pointBorderColor: 'rgb(75, 192, 192)',
-          pointHoverBackgroundColor: 'rgb(75, 192, 192)',
-          pointHoverBorderColor: 'rgb(220,220,220)',
-          fill: true,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          x: {
-            reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
-          }
-        }
-      }
+  // Inizializza il grafico solo quando allWeights ha valori
+  if (allWeights.value.length > 0) {
+    nextTick(() => {
+      initializeChart();
     });
-  });
+  }
 });
 
-watch(currentWeight, (newCurrentWeight, currentWeight) => {
-  if (currentWeight == 0 || newCurrentWeight == 0) {
-    message.value = ``;
-    return;
-  }
-  difference.value = newCurrentWeight - currentWeight;
-  if (difference.value > 0) {
-    message.value = `You've gained ${difference.value.toFixed(1)} kg`;
-  } else {
-    message.value = `You've lost ${-difference.value} kg`;
-  }
-  localStorage.setItem('message', message.value);
-});
+// Funzione per inizializzare il grafico
+const initializeChart = () => {
+  weightChart.value = new Chart(weightChartEl.value!.getContext('2d')!, {
+    type: 'line',
+    data: {
+      labels: allWeights.value
+        .slice()  // Crea una copia dell'array per non modificarlo direttamente
+        .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+        .map(w => w.date.toLocaleDateString(localeIT, optionsIT))  // Estrai le etichette delle date
+        .slice(0, 7),  // Limita ai 7 valori più recenti
+      datasets: [{
+        label: 'Weight',
+        data: allWeights.value
+          .slice()  // Crea una copia dell'array per non modificarlo direttamente
+          .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
+          .map(w => w.weight)  // Estrai i valori dei pesi
+          .slice(0, 7),  // Limita ai 7 valori più recenti
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        pointBackgroundColor: 'rgb(75, 192, 192)',
+        pointBorderColor: 'rgb(75, 192, 192)',
+        pointHoverBackgroundColor: 'rgb(75, 192, 192)',
+        pointHoverBorderColor: 'rgb(220,220,220)',
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: {
+          reverse: true,  // Inverte l'asse X per fare in modo che i valori recenti siano sulla destra
+        }
+      }
+    }
+  });
+};
 
 watch(allWeights, (newWeights) => {
   localStorage.setItem('allWeights', JSON.stringify(newWeights));
 
-  if (weightChart.value && weightChart.value.data && weightChart.value.data.datasets && weightChart.value.data.datasets[0]) {
+  // Solo aggiorna il grafico se è stato creato
+  if (weightChart.value) {
     weightChart.value.data.labels = newWeights
       .slice()  // Crea una copia dell'array per non modificarlo direttamente
       .sort((a, b) => b.date.getTime() - a.date.getTime())  // Ordina per data decrescente
@@ -100,7 +95,10 @@ watch(allWeights, (newWeights) => {
 
     weightChart.value.update();
   } else {
-    console.error('weightChart structure is not defined as expected', weightChart.value);
+    // Se il grafico non è ancora stato creato, lo inizializza
+    nextTick(() => {
+      initializeChart();
+    });
   }
 }, { deep: true });
 
