@@ -1,7 +1,7 @@
 import { watch, ref, onMounted } from "vue"
 
 export default function useActivity() {
-    const activity = ref<string | null>(null)
+    const activity = ref<string>('');
 
     watch(activity, () => {
         localStorage.setItem('activity', activity.value);
