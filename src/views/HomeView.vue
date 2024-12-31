@@ -146,7 +146,7 @@ const handleDelete = (date: Date) => {
     <h4 
       class="text-center text-lg mb-4 text-gray-600"
       v-if="message"
-      :class="difference < 0 ? 'text-green-400' : 'text-red-400' ">{{ message }}</h4>
+      :class="difference !== null && difference < 0 ? 'text-green-400' : 'text-red-400' ">{{ message }}</h4>
 
     <form class="flex flex-col gap-4" @submit.prevent="submitForm">
       <input step="0.1" 
