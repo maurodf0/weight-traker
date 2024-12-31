@@ -11,16 +11,16 @@ const { allWeights, sortedWeight, currentWeight } = useWeight()
 const weightChart = shallowRef(null)
 const message = ref<string | null>(null)
 const difference = ref<number | null>(null)
-const weightChartEl = ref(null)
+const weightChart = shallowRef<Chart | null>(null);
 
 const weightInput = ref<number | null>(null)
 
 // Italian date format
 const localeIT = "it-IT"
 const optionsIT: Intl.DateTimeFormatOptions = {
-  weekday: 'short' as 'short',  // 'short', 'long', 'narrow' sono i valori validi per 'weekday'
+  weekday: 'short',  // deve essere uno dei valori "short", "long" o "narrow"
   year: 'numeric',
-  month: 'short' as 'short',    // 'short', 'long', 'narrow' sono i valori validi per 'month'
+  month: 'short',    // idem per "short", "long" o "narrow"
   day: 'numeric'
 };
 
