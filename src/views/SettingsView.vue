@@ -28,8 +28,8 @@ const { activity } = useActivity()
       <h1>Settings</h1>
 
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
-        <h2 class="text-xl font-bold dark:text-white">Sex</h2>
-        <p> Insert your sex for BMI and TDEE calculations</p>
+        <h2 class="text-xl font-bold dark:text-white">Gender</h2>
+        <p> Insert your gender for BMI and TDEE calculations</p>
         <div class="flex gap-4"> 
           <div class="input">
             <input type="radio" id="male" value="male" v-model="sex" class="mr-2">
