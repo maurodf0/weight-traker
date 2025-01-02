@@ -48,23 +48,23 @@ const { activity } = useActivity()
         <p>Insert your activity for BMI and TDEE calculations</p>
         <div class="flex gap-2 flex-col my-4"> 
           <div class="input">
-            <input type="radio" id="sedentary" value="sedentary" v-model="activity" class="mr-2">
+            <input type="radio" id="sedentary" value="1.2" v-model="activity" class="mr-2">
             <label title="not active" class="dark:text-white" for="sedentary">Sedentary</label>
           </div>
           <div class="input">
-            <input type="radio" id="lightlyActive" value="lightlyActive" v-model="activity" class="mr-2">
+            <input type="radio" id="lightlyActive" value="1.375" v-model="activity" class="mr-2">
             <label title="Low intensety training 1/3 days at week" class="dark:text-white" for="lightlyActive">Lightly Active</label>
           </div>
           <div class="input">
-            <input type="radio" id="moderatelyActive" value="moderatelyActive" v-model="activity" class="mr-2">
+            <input type="radio" id="moderatelyActive" value="1.55" v-model="activity" class="mr-2">
             <label title="Moderate intensety training 2/3 days at week" class="dark:text-white" for="moderatelyActive">Moderately Active</label> 
             </div>
             <div class="input">
-              <input type="radio" id="veryActive" value="veryActive" v-model="activity" class="mr-2">
+              <input type="radio" id="veryActive" value="1.725" v-model="activity" class="mr-2">
               <label title="Hight intensety training 4/5 days at week" class="dark:text-white" for="veryActive">Very Active</label>
             </div>
             <div class="input">
-              <input type="radio" id="extremlyActive" value="extremlyActive" v-model="activity" class="mr-2">
+              <input type="radio" id="extremlyActive" value="1.9" v-model="activity" class="mr-2">
               <label title="Hight intensety training every day or 2 times a day" class="dark:text-white" for="veryActive">Extremly Active</label>
             </div>
         </div>
