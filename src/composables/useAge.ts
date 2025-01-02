@@ -1,20 +1,26 @@
 import { watch, ref, onMounted } from "vue"
 
 export default function useAge() {
-    const sex = ref<number | null>(null)
+    const age = ref<number>(0)
 
-    watch(sex, () => {
-        localStorage.setItem('Age', age.value);
+    watch(age, () => {
+        localStorage.setItem('Age', age.value.toString());
     });
+
+    const submitAge = () => {
+        age.value = age.value
+        console.log(age.value)
+    }
 
     onMounted(() => {
         const storedAge = localStorage.getItem('age');
         if (storedAge) {
-            sex.value = storedAge;
+            age.value = age.value = parseInt(storedAge, 10);;
         }
     });
 
     return {
-        age
+        age,
+        submitAge
     }
 }

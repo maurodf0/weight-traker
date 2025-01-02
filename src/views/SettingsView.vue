@@ -5,7 +5,7 @@ import useHeight from '@/composables/useHeight'
 import HeightInput from '@/components/heightInput.vue'
 import useSex from '@/composables/useSex'
 import useActivity from '@/composables/useActivity'
-
+import useAge from '@/composables/useAge'
 
 const mode = useColorMode() // Ref<'dark' | 'light'>
 
@@ -15,10 +15,10 @@ const toggleMode = () => {
 }
 
 const  { height, submitHeight } = useHeight()
-
+const { age, submitAge } = useAge()
 const { sex } = useSex()
-
 const { activity } = useActivity()  
+
 
 </script>
 
@@ -44,20 +44,20 @@ const { activity } = useActivity()
       </section>
 
            <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
-          <h2 class="text-xl font-bold dark:text-white">Gender</h2>
-          <p> Insert your gender for BMI and TDEE calculations</p>
-          <div class="flex gap-4"> 
-            <div class="input">
-              <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
-              <label class=" dark:text-white" for="male">Male</label>
-            </div>
-            <div class="input">
-              <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
-              <label class="dark:text-white" for="female">Female</label>
-          </div>
-
-          </div>
-      </section>
+            <h2 class="text-xl font-bold dark:text-white">Age</h2>
+            <p> Insert your age for TDEE calculations</p>
+          
+              <form class="flex flex-col gap-4" @submit.prevent="submitAge">
+              <input 
+                v-model="age"
+                step="0.1" 
+                class="px-4 py-2 border border-gray-300 focus:border-slate-500 focus:ring focus:ring-blue-200 rounded-lg"
+                type="number"
+                id="age" 
+                placeholder="Enter your age">
+              <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-slate-600">
+              </form>
+          </section>
 
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
         <h2 class="text-xl font-bold dark:text-white">Activity</h2>
