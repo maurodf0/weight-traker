@@ -31,7 +31,8 @@ const tdee = computed(() => {
 <template>
     <div>
         <h1>TDEE</h1>
-        <p>Your TDEE is: {{ tdee }}</p>
+        <p v-if="tdee">Your TDEE is: {{ tdee }}</p>
+        <p v-else>Please enter your sex, height and age in the settings to calculate your TDEE</p>
     
     </div>
 </template>
