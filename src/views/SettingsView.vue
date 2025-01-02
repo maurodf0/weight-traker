@@ -28,19 +28,35 @@ const { activity } = useActivity()
       <h1>Settings</h1>
 
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
-        <h2 class="text-xl font-bold dark:text-white">Gender</h2>
-        <p> Insert your gender for BMI and TDEE calculations</p>
-        <div class="flex gap-4"> 
-          <div class="input">
-            <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
-            <label class=" dark:text-white" for="male">Male</label>
+          <h2 class="text-xl font-bold dark:text-white">Gender</h2>
+          <p> Insert your gender for BMI and TDEE calculations</p>
+          <div class="flex gap-4"> 
+            <div class="input">
+              <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
+              <label class=" dark:text-white" for="male">Male</label>
+            </div>
+            <div class="input">
+              <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
+              <label class="dark:text-white" for="female">Female</label>
           </div>
-          <div class="input">
-            <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
-            <label class="dark:text-white" for="female">Female</label>
-        </div>
 
-        </div>
+          </div>
+      </section>
+
+           <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
+          <h2 class="text-xl font-bold dark:text-white">Gender</h2>
+          <p> Insert your gender for BMI and TDEE calculations</p>
+          <div class="flex gap-4"> 
+            <div class="input">
+              <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
+              <label class=" dark:text-white" for="male">Male</label>
+            </div>
+            <div class="input">
+              <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
+              <label class="dark:text-white" for="female">Female</label>
+          </div>
+
+          </div>
       </section>
 
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">

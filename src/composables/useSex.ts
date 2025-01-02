@@ -1,7 +1,7 @@
 import { watch, ref, onMounted } from "vue"
 
 export default function useSex() {
-    const sex = ref<string>('')
+    const sex = ref<string | number>('')
 
     watch(sex, () => {
         localStorage.setItem('sex', sex.value);
