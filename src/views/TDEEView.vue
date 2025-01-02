@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+import useSex from '@/composables/useSex'
+import useActivity from '@/composables/useActivity'
+import useHeight from '@/composables/useHeight'
+
 
 </script>
 
