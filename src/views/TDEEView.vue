@@ -5,10 +5,12 @@ import { computed } from 'vue'
 import useSex from '@/composables/useSex'
 import useActivity from '@/composables/useActivity'
 import useHeight from '@/composables/useHeight'
+import useAge from '@/composables/useAge'
 
 const { sex } = useSex()
 const { activity } = useActivity()  
 const { height } = useHeight()
+const { age } = useAge()
 
 const tdee = computed(() => {
   if (sex.value && activity.value && height.value) {
