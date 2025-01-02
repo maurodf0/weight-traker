@@ -32,11 +32,11 @@ const { activity } = useActivity()
         <p> Insert your gender for BMI and TDEE calculations</p>
         <div class="flex gap-4"> 
           <div class="input">
-            <input type="radio" id="male" value="male" v-model="sex" class="mr-2">
+            <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
             <label class=" dark:text-white" for="male">Male</label>
           </div>
           <div class="input">
-            <input type="radio" id="female" value="female" v-model="sex" class="mr-2">
+            <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
             <label class="dark:text-white" for="female">Female</label>
         </div>
 
