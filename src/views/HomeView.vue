@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import InfoCard from '@/components/InfoCard.vue';
+
 
 </script>
 
@@ -7,7 +9,9 @@
     <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Weight Tracker</h1>
 
     <div class="flex flex-col gap-4">
-      
+        <InfoCard info="BMI" description="Calculate your BMI based on your height and weight."/>
+        <InfoCard info="TDEE" description="Calculate your TDEE based on your sex, height, age, and activity level."/>
+        <InfoCard info="Weights" description="Track your weight over time."/> 
     </div>
   </div>
-</template>
+</template> 
