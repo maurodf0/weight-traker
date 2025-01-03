@@ -13,6 +13,8 @@ const { height } = useHeight();
 const { age } = useAge();
 const { currentWeight } = useWeight();
 
+console.log(typeof activity.value);
+
 const tdee = computed(() => {
   if (sex.value && activity.value && height.value && age.value && currentWeight.value) {
     const sexAsNumber = Number(sex.value);
@@ -28,7 +30,10 @@ const tdee = computed(() => {
       return 'Please enter valid sex to calculate your TDEE.';
     }
 
-    return `${(REE * activity.value).toFixed(2)}`;
+
+    const activityAsNumber = Number(activity.value);
+
+    return `${(REE * activityAsNumber).toFixed(2)}`;
   } else {
     return 'Please fill all fields to calculate your TDEE.';
   }
