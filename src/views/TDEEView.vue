@@ -28,7 +28,7 @@ const tdee = computed(() => {
       return 'Please enter valid sex to calculate your TDEE.';
     }
 
-    return `${(REE * activity.value).toFixed(2)} kcal`;
+    return `${(REE * activity.value).toFixed(2)}`;
   } else {
     return 'Please fill all fields to calculate your TDEE.';
   }
@@ -42,7 +42,7 @@ const tdee = computed(() => {
 
     <div v-if="tdee" class="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
       <p class="text-lg text-gray-800 dark:text-gray-100 font-semibold">
-        Your TDEE is: <span class="text-blue-500 dark:text-blue-400">{{ tdee }}</span>
+        Your TDEE is: <span class="text-blue-500 dark:text-blue-400">{{ tdee }} Kcal/day</span>
       </p>
       <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
         This is an estimation of your TDEE based on your sex, height, age, and activity. Eating this many calories will maintain your current weight.

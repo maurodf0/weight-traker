@@ -169,7 +169,7 @@ const handleDelete = (date: Date) => {
         <h5 class="text-gray-500 italic px-4 py-2 rounded">Latest</h5>
       </div>
       <ul v-auto-animate>
-        <li class="flex justify-between items-center bg-gray-100 dark:bg-gray-500 dark:even:bg-gray-600 even:bg-gray-200 py-2 px-4 rounded mb-2"
+        <li class="flex justify-between items-center bg-gray-100 dark:bg-gray-500 dark:even:bg-slate-700 even:bg-gray-200 py-2 px-4 rounded mb-2"
             v-for="w in sortedWeight.slice(0, 7)"
             :key="w.date.toString()">
           <span>{{ w.weight }} <span class="text-sm">Kg</span> - 
