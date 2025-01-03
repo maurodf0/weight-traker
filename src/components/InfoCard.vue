@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col gap-4 p-6 bg-white dark:bg-slate-700 rounded-lg">
+    <div class="flex flex-col gap-2 p-6 bg-gray-100 dark:bg-slate-700 rounded-lg">
         <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-100">
             {{ info }}
         </h2>
