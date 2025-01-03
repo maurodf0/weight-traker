@@ -10,11 +10,11 @@
             <div class="flex justify-between items-center">
                    <RouterLink to="/"><span class="ml-3 text-xl font-bold text-gray-900 dark:text-white">Weight Traker</span> </RouterLink> 
  
-                <!-- <div class="flex items-center gap-x-4">
-                    <RouterLink to="/bmi" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">BMI</RouterLink>                   
-                    <RouterLink to="/tdee" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">TDEE</RouterLink>
+                <div class="flex items-center gap-x-4">
+                    <!-- <RouterLink to="/bmi" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">BMI</RouterLink>                   
+                    <RouterLink to="/tdee" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">TDEE</RouterLink> -->
                     <RouterLink to="/settings" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">Settings</RouterLink>
-                </div> -->
+                </div>
             </div>
         </div>
     </header>
