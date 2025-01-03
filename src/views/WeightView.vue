@@ -5,6 +5,8 @@ import Chart from 'chart.js/auto';
 import NumberAnimation from "vue-number-animation";
 import 'chartjs-adapter-date-fns';
 import useWeight from '@/composables/useWeight'
+import useTracker from '@/composables/useTracker'
+
 
 const { allWeights, sortedWeight, currentWeight } = useWeight()
 
@@ -123,6 +125,10 @@ const submitForm = (e: Event) => {
 const handleDelete = (date: Date) => {
   allWeights.value = allWeights.value.filter(w => w.date !== date)
 }
+
+
+const { setWeight } = useTracker();
+setWeight(currentWeight.value);
 
 </script>
 
