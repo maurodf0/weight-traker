@@ -40,7 +40,7 @@ const tdee = computed(() => {
   <div class="max-w-3xl mx-auto my-8 p-6 bg-white dark:bg-gray-800 rounded-lg ">
     <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">TDEE Calculator</h1>
 
-    <div v-if="tdee" class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+    <div v-if="tdee" class="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
       <p class="text-lg text-gray-800 dark:text-gray-100 font-semibold">
         Your TDEE is: <span class="text-blue-500 dark:text-blue-400">{{ tdee }}</span>
       </p>
