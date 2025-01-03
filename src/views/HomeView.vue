@@ -12,9 +12,17 @@ const { weight, tdee, bmi } = useTracker();
     <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Weight Tracker</h1>
 
     <div class="flex flex-col gap-4">
-        <InfoCard :info="weight" description="Current Weight"/>
-        <InfoCard :info="tdee" description="TDEE"/>
-        <InfoCard :info="bmi" description="BMI"/>
+        <RouterLink to="/weight">
+             <InfoCard :info="weight" description="Weight"/>
+        </RouterLink>
+    
+          <RouterLink to="/bmi">
+             <InfoCard :info="bmi" description="BMI"/>
+        </RouterLink>
+
+           <RouterLink to="/tdee">
+             <InfoCard :info="tdee" description="TDEE"/>
+        </RouterLink>
     </div>
   </div>
 </template> 
