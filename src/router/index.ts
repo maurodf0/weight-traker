@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import SettingsView from '@/views/SettingsView.vue';
 import BMIView from '@/views/BMIView.vue';
 import TDEEView from '@/views/TDEEView.vue';
+import WeightView from '@/views/WeightView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,8 +11,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      alias: ['/home', '/same'],
+      alias: ['/home'],
       component: HomeView
+    },
+    {
+      path: '/weight',
+      name: 'weight',
+      component: WeightView
     },
     {
          path: '/settings',
