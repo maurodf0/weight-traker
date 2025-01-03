@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import InfoCard from '@/components/InfoCard.vue';
-
-
 </script>
 
 <template>
