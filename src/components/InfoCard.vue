@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 defineProps({
     info: {
-        type: String,
+        type: [String, Number, null],
         required: true
     },
     description: {

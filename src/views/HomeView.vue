@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import InfoCard from '@/components/InfoCard.vue';
+import useTracker from '@/composables/useTracker';
+
+const { weight, tdee, bmi } = useTracker();
+
+
 </script>
 
 <template>
@@ -7,9 +12,9 @@ import InfoCard from '@/components/InfoCard.vue';
     <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Weight Tracker</h1>
 
     <div class="flex flex-col gap-4">
-        <InfoCard info="25.73" description="BMI: Overweight"/>
-        <InfoCard info="2687.13 Kcal/day" description="TDEE"/>
-        <InfoCard info="73.9" description="Current Weight"/> 
+        <InfoCard :info="weight" description="Current Weight"/>
+        <InfoCard :info="tdee" description="TDEE"/>
+        <InfoCard :info="bmi" description="BMI"/>
     </div>
   </div>
 </template> 

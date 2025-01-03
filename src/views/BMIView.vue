@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import useHeight from '@/composables/useHeight'
 import useWeight from '@/composables/useWeight'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 const { height, heightinMeters } = useHeight()
 const { currentWeight } = useWeight()
+import useTracker from '@/composables/useTracker'
+
 
 // Computed property per calcolare il BMI
 const BMI = computed(() => {
@@ -27,6 +29,11 @@ const BMIMessage = computed(() => {
     }
   }
   return null;
+});
+
+const { setBMI } = useTracker();
+watch(BMI, () => {
+  setBMI(parseInt(BMI.value, 10));
 });
 
 

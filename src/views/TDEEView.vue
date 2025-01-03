@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 
 import useSex from '@/composables/useSex';
 import useActivity from '@/composables/useActivity';
 import useHeight from '@/composables/useHeight';
 import useAge from '@/composables/useAge';
 import useWeight from '@/composables/useWeight';
+import useTracker from '@/composables/useTracker';
 
+const { setTDEE } = useTracker();
 const { sex } = useSex();
 const { activity } = useActivity();
 const { height } = useHeight();
 const { age } = useAge();
 const { currentWeight } = useWeight();
-
-console.log(typeof activity.value);
 
 const tdee = computed(() => {
   if (sex.value && activity.value && height.value && age.value && currentWeight.value) {
@@ -38,6 +38,13 @@ const tdee = computed(() => {
     return 'Please fill all fields to calculate your TDEE.';
   }
 });
+
+  watch(tdee, () => {
+  setTDEE(tdee.value);
+  });
+
+
+
 </script>
 
 
