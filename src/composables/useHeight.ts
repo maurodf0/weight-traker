@@ -17,7 +17,6 @@ export default function useHeight() {
         localStorage.setItem('height', height.value.toString());
     });
 
-    console.log("Height submitted:", height.value);
 
     onMounted(() => {
         const storedHeight = localStorage.getItem('height');
