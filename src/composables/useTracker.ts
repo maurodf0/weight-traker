@@ -1,8 +1,14 @@
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, watchEffect } from 'vue';
 
 const weight = ref<string | null>(null);
 const tdee = ref<string | null>(null);
 const bmi = ref<string | null>(null);
+
+watchEffect(() => {
+  weight.value = localStorage.getItem('weight');
+  tdee.value = localStorage.getItem('tdee');
+  bmi.value = localStorage.getItem('bmi');
+});
 
 watch(weight, () => {
   localStorage.setItem('weight', weight.value);
