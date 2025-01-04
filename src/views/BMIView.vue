@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import useHeight from '@/composables/useHeight'
-import useWeight from '@/composables/useWeight'
-import { computed, ref, watch } from 'vue'
-const { height, heightinMeters } = useHeight()
-const { currentWeight } = useWeight()
+
+import useCalculations from '@/composables/useCalculations'
 import useTracker from '@/composables/useTracker'
+import { computed, ref, watch } from 'vue'
+const { bmi } = useCalculations()
+const { setBMI } = useTracker();
 
-
-// Computed property per calcolare il BMI
-const BMI = computed(() => {
-  if (height.value) {
-   return (currentWeight.value / (heightinMeters.value * heightinMeters.value)).toFixed(2) 
-  }
-  return null
-})
 
 const BMIMessage = computed(() => {
-  const bmiNumber = BMI.value ? parseFloat(BMI.value) : null;
+  const bmiNumber = bmi.value ? parseFloat(bmi.value) : null;
   if (bmiNumber) {
     if (bmiNumber < 18.5) {
       return 'You are Underweight';
@@ -31,9 +23,9 @@ const BMIMessage = computed(() => {
   return null;
 });
 
-const { setBMI } = useTracker();
-watch(BMI, () => {
-  setBMI(BMI.value); 
+
+watch(bmi, () => {
+  setBMI(bmi.value); 
 });
 
 

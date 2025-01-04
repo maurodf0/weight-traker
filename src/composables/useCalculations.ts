@@ -1,4 +1,4 @@
-import { computed, watchEffect } from 'vue';
+import { computed, onMounted, watchEffect } from 'vue';
 import useWeight from './useWeight';
 import useHeight from './useHeight';
 import useSex from './useSex';
@@ -7,18 +7,19 @@ import useActivity from './useActivity';
 
 export default function useCalculations() {
   const { currentWeight } = useWeight();
-  const { height } = useHeight();
+  const { height, heightinMeters } = useHeight();
   const { sex } = useSex();
   const { age } = useAge();
   const { activity } = useActivity();
 
   // Calcolo del BMI
   const bmi = computed(() => {
-    if (height.value && currentWeight.value) {
-      return (currentWeight.value / (height.value * height.value)).toFixed(2);
-    }
-    return null;
-  });
+  if (height.value) {
+   return (currentWeight.value / (heightinMeters.value * heightinMeters.value)).toFixed(2) 
+  }
+  return null
+})
+
 
   // Calcolo del TDEE
   const tdee = computed(() => {
@@ -44,8 +45,20 @@ export default function useCalculations() {
 
   // Aggiungi watchEffect per monitorare cambiamenti di BMI e TDEE
   watchEffect(() => {
-    console.log("BMI:", bmi.value);
-    console.log("TDEE:", tdee.value);
+   localStorage.setItem('bmi', bmi.value);
+    localStorage.setItem('tdee', tdee.value);
+  });
+
+  onMounted(() => {
+    const storedBmi = localStorage.getItem('bmi');
+    if (storedBmi) {
+      bmi.value = storedBmi;
+    }
+
+    const storedTdee = localStorage.getItem('tdee');
+    if (storedTdee) {
+      tdee.value = storedTdee;
+    }
   });
 
   return {
