@@ -1,43 +1,10 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-
-import useSex from '@/composables/useSex';
-import useActivity from '@/composables/useActivity';
-import useHeight from '@/composables/useHeight';
-import useAge from '@/composables/useAge';
-import useWeight from '@/composables/useWeight';
+import { watch } from 'vue';
+import useCalculations from '@/composables/useCalculations';
 import useTracker from '@/composables/useTracker';
-
 const { setTDEE } = useTracker();
-const { sex } = useSex();
-const { activity } = useActivity();
-const { height } = useHeight();
-const { age } = useAge();
-const { currentWeight } = useWeight();
+const { tdee } = useCalculations();
 
-const tdee = computed(() => {
-  if (sex.value && activity.value && height.value && age.value && currentWeight.value) {
-    const sexAsNumber = Number(sex.value);
-    let REE = 0;
-
-    if (sexAsNumber === 655.095) {
-      // Donne
-      REE = sexAsNumber + (9.563 * currentWeight.value) + (1.8496 * height.value) - (4.6756 * age.value);
-    } else if (sexAsNumber === 66.473) {
-      // Uomini
-      REE = sexAsNumber + (13.7516 * currentWeight.value) + (5.0033 * height.value) - (6.7550 * age.value);
-    } else {
-      return 'Please enter valid sex to calculate your TDEE.';
-    }
-
-
-    const activityAsNumber = Number(activity.value);
-
-    return `${(REE * activityAsNumber).toFixed(2)}`;
-  } else {
-    return 'Please fill all fields to calculate your TDEE.';
-  }
-});
 
   watch(tdee, () => {
   setTDEE(tdee.value);
