@@ -8,7 +8,7 @@ const { setBMI } = useTracker();
 
 
 const BMIMessage = computed(() => {
-  const bmiNumber = bmi.value ? parseFloat(bmi.value) : null;
+  const bmiNumber = bmi ? parseFloat(bmi.value) : null;
   if (bmiNumber) {
     if (bmiNumber < 18.5) {
       return 'You are Underweight';
