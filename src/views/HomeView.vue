@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import InfoCard from '@/components/InfoCard.vue';
 import useTracker from '@/composables/useTracker';
+import useCalculations from '@/composables/useCalculations';
 
-const { weight, tdee, bmi } = useTracker();
+const { weight } = useTracker();
+
+const { tdee, bmi } = useCalculations();
 </script>
 
 <template>
@@ -19,5 +22,9 @@ const { weight, tdee, bmi } = useTracker();
         <InfoCard :info="tdee" description="TDEE" suffix="Kcal/day" />
       </RouterLink>
     </div>
+
+    {{ tdee }}
+    {{ bmi }}
   </div>
+
 </template> 

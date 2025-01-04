@@ -1,43 +1,25 @@
-import { ref, watch, onMounted, watchEffect } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 const weight = ref<string | null>(null);
 const tdee = ref<string | null>(null);
 const bmi = ref<string | null>(null);
 
-watchEffect(() => {
-  weight.value = localStorage.getItem('weight');
-  tdee.value = localStorage.getItem('tdee');
-  bmi.value = localStorage.getItem('bmi');
-});
+// Funzione per sincronizzare una variabile reattiva con localStorage
+function syncWithLocalStorage(key: string, refValue: any) {
+  const storedValue = localStorage.getItem(key);
+  if (storedValue) refValue.value = storedValue;
 
-watch(weight, () => {
-  localStorage.setItem('weight', weight.value);
-});
+  watch(refValue, () => {
+    if (refValue.value !== null) {
+      localStorage.setItem(key, refValue.value);
+    }
+  });
+}
 
-watch(tdee, () => {
-  localStorage.setItem('tdee', tdee.value);
-});
-
-watch(bmi, () => {
-  localStorage.setItem('bmi', bmi.value);
-});     
-
-onMounted(() => {
-  const storedWeight = localStorage.getItem('weight');
-  if (storedWeight) {
-    weight.value = storedWeight;
-  }
-
-  const storedTDEE = localStorage.getItem('tdee');
-  if (storedTDEE) {
-    tdee.value = storedTDEE;
-  }
-
-  const storedBMI = localStorage.getItem('bmi');
-  if (storedBMI) {
-    bmi.value = storedBMI;
-  }
-});
+// Sincronizza le variabili con localStorage
+syncWithLocalStorage('weight', weight);
+syncWithLocalStorage('tdee', tdee);
+syncWithLocalStorage('bmi', bmi);
 
 export default function useTracker() {
   return {
@@ -46,11 +28,9 @@ export default function useTracker() {
     bmi,
     setWeight(value: string) {
       weight.value = value;
-      console.log(weight.value);
     },
     setTDEE(value: string) {
       tdee.value = value;
-      console.log(tdee.value);
     },
     setBMI(value: string) {
       bmi.value = value;

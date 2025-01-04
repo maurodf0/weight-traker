@@ -33,7 +33,7 @@ const BMIMessage = computed(() => {
 
 const { setBMI } = useTracker();
 watch(BMI, () => {
-  setBMI(BMI.value);
+  setBMI(BMI.value); 
 });
 
 
