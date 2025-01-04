@@ -130,7 +130,7 @@ const handleDelete = (date: Date) => {
 const { setWeight } = useTracker();
 
   watch(currentWeight, () => {
-  setWeight(currentWeight.value);
+  setWeight(currentWeight.value.toString());
   });
 
 </script>
