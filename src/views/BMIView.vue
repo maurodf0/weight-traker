@@ -41,6 +41,16 @@ watch(bmi, () => {
         Your BMI is: <span class="text-blue-600 dark:text-blue-400">{{ bmi }}</span>
       </p>
       <p class="mt-2 text-gray-700 dark:text-gray-300">{{ BMIMessage }}</p>
+
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+        This is an estimation of your BMI based on your sex, height, and weight.
+      </p>
+      <p class="mt-4 text-xs text-gray-500 dark:text-gray-400">
+        <strong>Note:</strong> BMI is calculated based on your sex, height, and weight. The calculation may not be accurate for all scenarios. 
+        Please consult a healthcare provider before making significant changes to your diet or exercise routine. 
+        This estimate is not a replacement for medical advice.
+        N.B: BMI is an estimation and not consider a lot of factors that can affect your health, like, for example, muscle mass.
+      </p>
     </div>
 
     <div v-else class="p-4 bg-red-100 dark:bg-red-800 rounded-md shadow">
