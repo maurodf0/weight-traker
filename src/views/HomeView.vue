@@ -22,9 +22,6 @@ const { tdee, bmi } = useCalculations();
         <InfoCard :info="tdee" description="TDEE" suffix="Kcal/day" />
       </RouterLink>
     </div>
-
-    {{ tdee }}
-    {{ bmi }}
   </div>
 
 </template> 
