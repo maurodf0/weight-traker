@@ -69,19 +69,19 @@ const { activity } = useActivity()
           </div>
           <div class="input">
             <input type="radio" id="lightlyActive" value="1.375" v-model="activity" class="mr-2">
-            <label title="Low intensety training from 1 to 3 days at week, walk less than 8000 steps day" class="dark:text-white" for="lightlyActive">Lightly Active</label>
+            <label title="Training 1 to 3 days at week, walk less than 8000 steps day" class="dark:text-white" for="lightlyActive">Lightly Active</label>
           </div>
           <div class="input">
             <input type="radio" id="moderatelyActive" value="1.55" v-model="activity" class="mr-2">
-            <label title="Moderate intensety training 3 to 4 days at week, from 8000 to 12000 steps day" class="dark:text-white" for="moderatelyActive">Moderately Active</label> 
+            <label title="Training 3 to 4 days at week, from 8000 to 12000 steps day" class="dark:text-white" for="moderatelyActive">Moderately Active</label> 
             </div>
             <div class="input">
               <input type="radio" id="veryActive" value="1.725" v-model="activity" class="mr-2">
-              <label title="Hight intensety training 4/5 days at week" class="dark:text-white" for="veryActive">Very Active</label>
+              <label title="Training 5 days at week, from 12000 to 16000 steps day" class="dark:text-white" for="veryActive">Very Active</label>
             </div>
             <div class="input">
               <input type="radio" id="extremlyActive" value="1.9" v-model="activity" class="mr-2">
-              <label title="Hight intensety training every day or 2 times a day" class="dark:text-white" for="veryActive">Extremly Active</label>
+              <label title="Training 6 days at week or more" class="dark:text-white" for="veryActive">Extremly Active</label>
             </div>
         </div>
       </section>
