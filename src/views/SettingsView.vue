@@ -65,15 +65,15 @@ const { activity } = useActivity()
         <div class="flex gap-2 flex-col my-4"> 
           <div class="input">
             <input type="radio" id="sedentary" value="1.2" v-model="activity" class="mr-2">
-            <label title="not active" class="dark:text-white" for="sedentary">Sedentary</label>
+            <label title="not active: no workout and no exercise, walk less than 4000 steps day" class="dark:text-white" for="sedentary">Sedentary</label>
           </div>
           <div class="input">
             <input type="radio" id="lightlyActive" value="1.375" v-model="activity" class="mr-2">
-            <label title="Low intensety training 1/3 days at week" class="dark:text-white" for="lightlyActive">Lightly Active</label>
+            <label title="Low intensety training from 1 to 3 days at week, walk less than 8000 steps day" class="dark:text-white" for="lightlyActive">Lightly Active</label>
           </div>
           <div class="input">
             <input type="radio" id="moderatelyActive" value="1.55" v-model="activity" class="mr-2">
-            <label title="Moderate intensety training 2/3 days at week" class="dark:text-white" for="moderatelyActive">Moderately Active</label> 
+            <label title="Moderate intensety training 3 to 4 days at week, from 8000 to 12000 steps day" class="dark:text-white" for="moderatelyActive">Moderately Active</label> 
             </div>
             <div class="input">
               <input type="radio" id="veryActive" value="1.725" v-model="activity" class="mr-2">
