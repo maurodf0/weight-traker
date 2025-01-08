@@ -2,9 +2,11 @@ import { watch, ref, onMounted } from "vue"
 
 export default function useAge() {
     const age = ref<number>(0)
+    const isAgeReady = ref<boolean>(false)
 
     watch(age, () => {
         localStorage.setItem('age', age.value.toString());
+        isAgeReady.value = true;
     });
 
    const submitAge = () => {
@@ -14,6 +16,7 @@ export default function useAge() {
         age.value = 0;
     }
     console.log("Age submitted:", age.value);
+    isAgeReady.value = true;
 };
 
 
@@ -26,6 +29,7 @@ export default function useAge() {
 
     return {
         age,
-        submitAge
+        submitAge,
+        isAgeReady
     }
 }
