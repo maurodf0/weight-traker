@@ -16,13 +16,11 @@ const { setBMI } = useTracker();
     import "vue-data-ui/style.css";
   
     
-    
 
     const config = ref({"responsive":false,"theme":"","customPalette":[],"style":{"fontFamily":"inherit","chart":{"backgroundColor":"#ffffff00","color":"#1A1A1Aff","animation":{"use":true,"speed":"1","acceleration":1},"layout":{"radiusRatio":1,"track":{"size":1,"useGradient":false,"gradientIntensity":"13"},"markers":{"show":true,"color":"#1A1A1Aff","bold":true,"fontSizeRatio":1,"offsetY":0,"roundingValue":0,"formatter":null,"prefix":"","suffix":""},"segmentSeparators":{"show":false,"offsetOut":0,"offsetIn":0,"stroke":"#1A1A1Aff","strokeWidth":1},"segmentNames":{"show":true,"curved":true,"offsetRatio":"1.12","fontSize":16,"useSerieColor":true,"color":"#1A1A1Aff","bold":false},"pointer":{"type":"rounded","size":1,"stroke":"#1a1a1a00","strokeWidth":19,"useRatingColor":true,"color":"#CCCCCCff","circle":{"radius":19,"stroke":"#1a1a1a00","strokeWidth":12,"color":"#FFFFFFff"}}},"legend":{"show":true,"fontSize":48,"prefix":"","suffix":"","roundingValue":1,"showPlusSymbol":true,"useRatingColor":true,"color":"#1A1A1Aff","formatter":null},"title":{"text":"BMI","color":"#1A1A1Aff","fontSize":20,"bold":true,"textAlign":"center","paddingLeft":0,"paddingRight":0,"subtitle":{"color":"#A1A1A1ff","text":"","fontSize":16,"bold":false}}}},"userOptions":{"show":false,"showOnChartHover":false,"keepStateOnChartLeave":true,"position":"right","buttons":{"tooltip":false,"pdf":false,"csv":false,"img":false,"table":false,"labels":false,"fullscreen":false,"sort":false,"stack":false,"animation":false,"annotator":false},"buttonTitles":{"open":"Open options","close":"Close options","pdf":"Download PDF","img":"Download PNG","fullscreen":"Toggle fullscreen","annotator":"Toggle annotator"}},"translations":{"base":"Base"}})
     
-
     const dataset = {
-    value: 25,
+    value: bmi.value ? bmi.value : localStorage.getItem('bmi'),
     series: [
         {
             from: 0,
@@ -80,7 +78,7 @@ watch(bmi, () => {
   setBMI(bmi.value); 
 });
 
-dataset.value = bmi;
+
 
 
 </script>
