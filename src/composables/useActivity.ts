@@ -8,6 +8,7 @@ export default function useActivity() {
     const submitActivity = (newActivity: string) => {
         activity.value = newActivity;
         isActivityReady.value = true;
+        console.log('Activity:', activity.value);
     };
     
 

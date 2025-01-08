@@ -17,7 +17,7 @@ const toggleMode = () => {
 const  { height, submitHeight } = useHeight()
 const { age, submitAge } = useAge()
 const { sex } = useSex()
-const { activity } = useActivity()  
+const { activity, submitActivity, activityOptions } = useActivity()
 
 
 </script>
@@ -62,7 +62,8 @@ const { activity } = useActivity()
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
         <h2 class="text-xl font-bold dark:text-white">Activity</h2>
         <p>Insert your activity for BMI and TDEE calculations</p>
-        <div class="flex gap-2 flex-col my-4"> 
+        <div class="flex gap-2 flex-col my-4">
+          <form class="flex flex-col gap-4" @submit.prevent="submitActivity">
           <div class="input">
             <input type="radio" id="sedentary" value="1.2" v-model="activity" class="mr-2">
             <label title="not active: no workout and no exercise, walk less than 4000 steps day" class="dark:text-white" for="sedentary">Sedentary</label>
@@ -81,8 +82,10 @@ const { activity } = useActivity()
             </div>
             <div class="input">
               <input type="radio" id="extremlyActive" value="1.9" v-model="activity" class="mr-2">
-              <label title="Training 6 days at week or more" class="dark:text-white" for="veryActive">Extremly Active</label>
+              <label title="Training 6 days at week or more" class="dark:text-white" for="extremlyActive">Extremly Active</label>
             </div>
+            <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-slate-600">
+          </form>
         </div>
       </section>
 
