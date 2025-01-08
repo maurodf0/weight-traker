@@ -14,26 +14,50 @@ const { setBMI } = useTracker();
         type VueUiGaugeConfig 
     } from "vue-data-ui";
     import "vue-data-ui/style.css";
+
+//     under 18.5 – This is described as underweight.
+// between 18.5 and 24.9 – This is described as the 'healthy range'.
+// between 25 and 29.9 – This is described as overweight.
+// between 30 and 39.9 – This is described as obesity.
+// 40 or over – This is described as severe obesity.
     
     
     const config = ref<VueUiGaugeConfig>();
 
     const dataset = {
-    base: 21200,
+    base: 20,
     value: bmi,
     series: [
         {
-            from: -100,
-            to: 0,
+            from: 0,
+            to: 18,
             color: "#ff6400",
-            name: 'critical'
+            name: 'underweight'
         },
         {
-            from: 0,
-            to: 100,
-            color: "#42d392",
-            name: 'nominal'
+            from: 18.5,
+            to: 24.9,
+            color: "#ff6400",
+            name: 'healthy'
         },
+        {
+            from: 25,
+            to: 29.9,
+            color: "#42d392",
+            name: 'overweight'
+        },
+        {
+            from: 30,
+            to: 39.9,
+            color: "#42d392",
+            name: 'obese'
+        },
+        {
+            from: 40,
+            to: 50,
+            color: "#ff6400",
+            name: 'severe obesity'
+        }
     ]
 }
 
