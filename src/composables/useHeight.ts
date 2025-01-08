@@ -14,15 +14,17 @@ export default function useHeight() {
   });
 
   // Salva il valore di `height` in localStorage quando cambia
-  watch(height, () => {
-    localStorage.setItem('height', height.value.toString());
-  });
+watch(height, () => {
+  if (height.value !== undefined && height.value !== 0) {
+    localStorage.setItem('height', JSON.stringify(height.value));
+  }
+});
 
   // Recupera il valore da localStorage al montaggio
   onMounted(() => {
     const storedHeight = localStorage.getItem('height');
     if (storedHeight) {
-      height.value = Number(storedHeight);
+      height.value =  JSON.parse(storedHeight);
       isHeightReady.value = true; // Dati caricati con successo
     }
   });
