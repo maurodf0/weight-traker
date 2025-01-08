@@ -7,10 +7,10 @@ import useActivity from './useActivity';
 
 export default function useCalculations() {
   const { currentWeight, isWeightReady } = useWeight();
-  const { height, heightinMeters } = useHeight();
-  const { sex } = useSex();
-  const { age } = useAge();
-  const { activity } = useActivity();
+  const { height, heightinMeters, isHeightReady } = useHeight();
+  const { sex, isSexReady } = useSex();
+  const { age, isAgeReady } = useAge();
+  const { activity, isActivityReady } = useActivity();
 
   const bmi = ref('');
   const tdee = ref('');
@@ -18,6 +18,10 @@ export default function useCalculations() {
   const areAllFieldsReady = computed(() => {
     return (
       isWeightReady.value &&
+      isHeightReady.value &&
+      isSexReady.value &&
+      isAgeReady.value &&
+      isActivityReady.value &&
       height.value &&
       heightinMeters.value &&
       sex.value &&
