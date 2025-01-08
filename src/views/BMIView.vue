@@ -7,6 +7,18 @@ const { bmi } = useCalculations()
 const { setBMI } = useTracker();
 
 
+    import { ref } from "vue";
+    import {
+        VueDataUi,
+        type VueUiGaugeDataset, 
+        type VueUiGaugeConfig 
+    } from "vue-data-ui";
+    import "vue-data-ui/style.css";
+    
+    
+    const dataset = ref<VueUiGaugeDataset>();
+    const config = ref<VueUiGaugeConfig>();
+
 const BMIMessage = computed(() => {
   const bmiNumber = bmi ? parseFloat(bmi.value) : null;
   if (bmiNumber) {
@@ -33,11 +45,20 @@ watch(bmi, () => {
 
 <template>
 
+  
+
   <div class="max-w-md mx-auto my-8 p-6 dark:bg-gray-800 rounded-lg">
     <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">BMI Calculator</h1>
 
     <div v-if="bmi" class="p-4 bg-white dark:bg-slate-700 rounded-md shadow">
       <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+
+    <VueDataUi
+        component="VueUiGauge"
+        :dataset="dataset"
+        :config="config"
+    />
+
         Your BMI is: <span class="text-blue-600 dark:text-blue-400">{{ bmi }}</span>
       </p>
       <p class="mt-2 text-gray-700 dark:text-gray-300">{{ BMIMessage }}</p>

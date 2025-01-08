@@ -16,6 +16,7 @@
     "chart.js": "^4.4.7",
     "chartjs-adapter-date-fns": "^3.0.0",
     "vue": "^3.5.13",
+    "vue-data-ui": "^2.4.69",
     "vue-number-animation": "^2.0.2",
     "vue-router": "^4.5.0"
   },
