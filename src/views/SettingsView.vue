@@ -63,7 +63,7 @@ const { activity, submitActivity, activityOptions } = useActivity()
         <h2 class="text-xl font-bold dark:text-white">Activity</h2>
         <p>Insert your activity for BMI and TDEE calculations</p>
         <div class="flex gap-2 flex-col my-4">
-          <form class="flex flex-col gap-4" @submit.prevent="submitActivity">
+          <form class="flex flex-col gap-4" @submit.prevent="submitActivity(activity)">
           <div class="input">
             <input type="radio" id="sedentary" value="1.2" v-model="activity" class="mr-2">
             <label title="not active: no workout and no exercise, walk less than 4000 steps day" class="dark:text-white" for="sedentary">Sedentary</label>

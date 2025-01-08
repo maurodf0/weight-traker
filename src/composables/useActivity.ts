@@ -5,10 +5,10 @@ export default function useActivity() {
     const isActivityReady = ref<boolean>(false);
     const activityOptions = ['sedentary', 'lightlyActive', 'moderatelyActive', 'veryActive', 'extremelyActive'];
 
-    const submitActivity = (newActivity: string) => {
+    const submitActivity = (newActivity) => {
         activity.value = newActivity;
         isActivityReady.value = true;
-        console.log('Activity:', activity.value);
+        console.log(activity.value);
     };
     
 
