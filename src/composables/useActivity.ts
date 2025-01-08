@@ -2,6 +2,14 @@ import { watch, ref, onMounted } from "vue"
 
 export default function useActivity() {
     const activity = ref<string>('');
+    const isActivityReady = ref<boolean>(false);
+    const activityOptions = ['sedentary', 'lightlyActive', 'moderatelyActive', 'veryActive', 'extremelyActive'];
+
+    const submitActivity = (newActivity: string) => {
+        activity.value = newActivity;
+        isActivityReady.value = true;
+    };
+    
 
     watch(activity, () => {
         localStorage.setItem('activity', activity.value);
@@ -11,10 +19,14 @@ export default function useActivity() {
         const storedActivity = localStorage.getItem('activity');
         if (storedActivity) {
             activity.value = storedActivity;
+            isActivityReady.value = true;
         }
     });
 
     return {
-        activity
+        activity,
+        isActivityReady,
+        activityOptions,
+        submitActivity
     }
 }
