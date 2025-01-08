@@ -25,41 +25,43 @@ const { setBMI } = useTracker();
     const config = ref<VueUiGaugeConfig>();
 
     const dataset = {
-    base: 20,
-    value: bmi,
+    base: 200000,
+    value: bmi.value,
     series: [
         {
             from: 0,
             to: 18,
-            color: "#ff6400",
+            color: "#CC6600",
             name: 'underweight'
         },
         {
             from: 18.5,
             to: 24.9,
-            color: "#ff6400",
+            color: "#42d392",
             name: 'healthy'
         },
         {
             from: 25,
             to: 29.9,
-            color: "#42d392",
+            color: "#CC6600",
             name: 'overweight'
         },
         {
             from: 30,
             to: 39.9,
-            color: "#42d392",
+            color: "#F32013",
             name: 'obese'
         },
         {
             from: 40,
             to: 50,
-            color: "#ff6400",
+            color: "#CA0B00",
             name: 'severe obesity'
         }
     ]
 }
+
+console.log(dataset.value)
 
 const BMIMessage = computed(() => {
   const bmiNumber = bmi ? parseFloat(bmi.value) : null;
