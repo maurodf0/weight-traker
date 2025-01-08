@@ -1,33 +1,36 @@
 import { ref, watch, computed, onMounted } from 'vue';
 
 export default function useHeight() {
+  const height = ref<number>(0); // Altezza in centimetri
+  const isHeightReady = ref(false); // Indica se l'altezza è stata caricata
 
-    const height = ref<number>(0);
+  const submitHeight = (newHeight: number) => {
+    height.value = newHeight;
+    isHeightReady.value = true; // Indica che i dati sono disponibili
+  };
 
-    const submitHeight = (newHeight: number) => {
-        height.value = newHeight;
+  const heightinMeters = computed(() => {
+    return height.value / 100;
+  });
+
+  // Salva il valore di `height` in localStorage quando cambia
+  watch(height, () => {
+    localStorage.setItem('height', height.value.toString());
+  });
+
+  // Recupera il valore da localStorage al montaggio
+  onMounted(() => {
+    const storedHeight = localStorage.getItem('height');
+    if (storedHeight) {
+      height.value = Number(storedHeight);
+      isHeightReady.value = true; // Dati caricati con successo
     }
+  });
 
-    const heightinMeters = computed(() => {
-        return height.value / 100;
-    });
-
-    // Salva direttamente il valore di `height` in centimetri quando cambia
-    watch(height, () => {
-        localStorage.setItem('height', height.value.toString());
-    });
-
-
-    onMounted(() => {
-        const storedHeight = localStorage.getItem('height');
-        if (storedHeight) {
-            height.value = Number(storedHeight);
-        }
-    });
-
-    return {
-        height,
-        heightinMeters,
-        submitHeight
-    };
+  return {
+    height,
+    heightinMeters,
+    submitHeight,
+    isHeightReady, // Restituiamo lo stato per controllare quando è pronto
+  };
 }
