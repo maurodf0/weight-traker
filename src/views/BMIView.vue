@@ -16,8 +16,26 @@ const { setBMI } = useTracker();
     import "vue-data-ui/style.css";
     
     
-    const dataset = ref<VueUiGaugeDataset>();
     const config = ref<VueUiGaugeConfig>();
+
+    const dataset = {
+    base: 21200,
+    value: bmi,
+    series: [
+        {
+            from: -100,
+            to: 0,
+            color: "#ff6400",
+            name: 'critical'
+        },
+        {
+            from: 0,
+            to: 100,
+            color: "#42d392",
+            name: 'nominal'
+        },
+    ]
+}
 
 const BMIMessage = computed(() => {
   const bmiNumber = bmi ? parseFloat(bmi.value) : null;
@@ -39,6 +57,8 @@ const BMIMessage = computed(() => {
 watch(bmi, () => {
   setBMI(bmi.value); 
 });
+
+dataset.value = bmi;
 
 
 </script>
