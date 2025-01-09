@@ -9,6 +9,12 @@ export default function useSex() {
         isSexReady.value = true;
     });
 
+    const submitSex = (newGender: string) => {
+        sex.value = newGender;
+        console.log("Sex submitted:", sex.value);
+        isSexReady.value = true;
+    };
+
     onMounted(() => {
         const storedSex = localStorage.getItem('sex');
         if (storedSex) {
@@ -19,6 +25,7 @@ export default function useSex() {
 
     return {
         sex,
-        isSexReady
+        isSexReady,
+        submitSex
     }
 }

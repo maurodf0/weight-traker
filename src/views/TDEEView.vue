@@ -2,8 +2,10 @@
 import { watch } from 'vue';
 import useCalculations from '@/composables/useCalculations';
 import useTracker from '@/composables/useTracker';
+import useSex from '@/composables/useSex';
 const { setTDEE } = useTracker();
 const { tdee, isLoading } = useCalculations();
+const { sex } = useSex();
 
     import { ref } from "vue";
     import { VueUiVerticalBar } from "vue-data-ui";
@@ -22,20 +24,23 @@ const { tdee, isLoading } = useCalculations();
     const dataset = ref([
   {
     "name": "Average Male TDEE",
-    "value": 2000,
+    "value": sex.value === 'male' ? 2000 : 1800,
     "color": "#6376DD",
     "children": []
   },
   {
     "name": "Your TDEE",
-    "value": tdee.value,
+    "value": tdee.value ? tdee.value : localStorage.getItem('tdee'),
     "color": "#ff6400",
     "children": []
   }
 ]);
 
 console.log(dataset.value)
-console.log(tdee.value) 
+if (tdee.value) {
+ console.log(tdee.value) 
+}
+
 
 
 </script>

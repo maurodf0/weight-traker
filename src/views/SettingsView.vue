@@ -16,7 +16,7 @@ const toggleMode = () => {
 
 const  { height, submitHeight } = useHeight()
 const { age, submitAge } = useAge()
-const { sex } = useSex()
+const { sex, submitSex} = useSex()
 const { activity, submitActivity, activityOptions } = useActivity()
 
 
@@ -30,17 +30,21 @@ const { activity, submitActivity, activityOptions } = useActivity()
         <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
           <h2 class="text-xl font-bold dark:text-white">Gender</h2>
           <p> Insert your gender for BMI and TDEE calculations</p>
-          <div class="flex gap-4"> 
-            <div class="input">
-              <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
-              <label class=" dark:text-white" for="male">Male</label>
+          <form class="flex flex-col gap-4" @submit.prevent="submitSex(sex)">
+            <div class="flex gap-4"> 
+              <div class="input">
+                <input type="radio" id="male" value="66.4730" v-model="sex" class="mr-2">
+                <label class=" dark:text-white" for="male">Male</label>
+              </div>
+              <div class="input">
+                <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
+                <label class="dark:text-white" for="female">Female</label>
             </div>
-            <div class="input">
-              <input type="radio" id="female" value="655.0955" v-model="sex" class="mr-2">
-              <label class="dark:text-white" for="female">Female</label>
           </div>
+          <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-slate-600">
+            </form>
 
-          </div>
+        
       </section>
 
            <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
