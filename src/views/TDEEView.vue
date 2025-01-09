@@ -8,12 +8,7 @@ const { tdee, isLoading } = useCalculations();
 const { sex, isSexReady } = useSex();
 
     import { VueUiVerticalBar } from "vue-data-ui";
-    import "vue-data-ui/style.css"
-        import {
-        VueDataUi,
-        type VueUiGaugeDataset, 
-        type VueUiGaugeConfig 
-    } from "vue-data-ui";
+
 
 
   watch(tdee, () => {
