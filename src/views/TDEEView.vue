@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watch, ref } from 'vue';
 import useCalculations from '@/composables/useCalculations';
 import useTracker from '@/composables/useTracker';
 import useSex from '@/composables/useSex';
@@ -7,9 +7,13 @@ const { setTDEE } = useTracker();
 const { tdee, isLoading } = useCalculations();
 const { sex, isSexReady } = useSex();
 
-    import { ref } from "vue";
     import { VueUiVerticalBar } from "vue-data-ui";
     import "vue-data-ui/style.css"
+        import {
+        VueDataUi,
+        type VueUiGaugeDataset, 
+        type VueUiGaugeConfig 
+    } from "vue-data-ui";
 
 
   watch(tdee, () => {
