@@ -14,6 +14,7 @@ export default function useCalculations() {
 
   const bmi = ref('');
   const tdee = ref('');
+  const isLoading = ref(true);
 
   const areAllFieldsReady = computed(() => {
     return (
@@ -33,6 +34,7 @@ export default function useCalculations() {
   const calculateBmi = computed(() => {
     if (areAllFieldsReady.value) {
       return (currentWeight.value / (heightinMeters.value ** 2)).toFixed(2);
+      isLoading.value = true;
     }
     return 'Loading...';
   });
@@ -52,8 +54,10 @@ export default function useCalculations() {
 
       const activityAsNumber = Number(activity.value);
       return (REE * activityAsNumber).toFixed(2);
+      isLoading.value = false
     }
     return 'Loading...';
+    
   });
 
   watchEffect(() => {
@@ -69,5 +73,6 @@ export default function useCalculations() {
   return {
     bmi,
     tdee,
+    isLoading
   };
 }
