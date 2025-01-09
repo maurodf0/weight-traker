@@ -41,13 +41,12 @@ export default function useCalculations() {
 
   const calculateTdee = computed(() => {
     if (areAllFieldsReady.value) {
-      const sexAsNumber = sex.value === 'female' ? 655.095 : 66.473;
-      const weightFactor = sex.value === 'female' ? 9.563 : 13.7516;
-      const heightFactor = sex.value === 'female' ? 1.8496 : 5.0033;
-      const ageFactor = sex.value === 'female' ? 4.6756 : 6.755;
+      const weightFactor = sex.value === '655.0955' ? 9.563 : 13.7516;
+      const heightFactor = sex.value === '655.0955' ? 1.8496 : 5.0033;
+      const ageFactor = sex.value === '655.0955' ? 4.6756 : 6.755;
 
       const REE =
-        sexAsNumber +
+        parseInt(sex.value) +
         weightFactor * currentWeight.value +
         heightFactor * height.value -
         ageFactor * age.value;
