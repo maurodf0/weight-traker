@@ -166,7 +166,7 @@ const { sex, isSexReady } = useSex();
       "table": "Toggle table",
       "fullscreen": "Toggle fullscreen",
       "sort": "Toggle sort",
-      "annotator": "Toggle annotator"
+      "annotator": false
     }
   },
   "table": {
@@ -205,7 +205,7 @@ const { sex, isSexReady } = useSex();
   },
   {
     "name": "Your TDEE",
-    "value": lastTdee,
+    "value": Number(lastTdee),
     "color": "#ff6400",
     "children": []
   }
