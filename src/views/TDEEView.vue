@@ -3,212 +3,216 @@ import { watch, ref } from 'vue';
 import useCalculations from '@/composables/useCalculations';
 import useTracker from '@/composables/useTracker';
 import useSex from '@/composables/useSex';
-import {
-  VueUiVerticalBar,
-  type VueUiVerticalBarConfig,
-  type VueUiVerticalBarDatasetItem
-} from "vue-data-ui";
-import "vue-data-ui/style.css";
-
 const { setTDEE } = useTracker();
 const { tdee, isLoading } = useCalculations();
 const { sex, isSexReady } = useSex();
 
-watch(tdee, () => {
+
+    import { VueUiVerticalBar, type VueUiVerticalBarConfig, type VueUiVerticalBarDatasetItem} from "vue-data-ui";
+    import "vue-data-ui/style.css"
+
+
+  watch(tdee, () => {
   setTDEE(tdee.value);
-});
+  });
 
-const lastGender = sex.value ? sex.value : localStorage.getItem('sex');
-const lastTdee: string | null = tdee.value ? tdee.value : localStorage.getItem('tdee');
+      import {
+        VueDataUi,
+    } from "vue-data-ui";
+    import "vue-data-ui/style.css";
 
-const config = ref<VueUiVerticalBarConfig>({
-  responsive: false,
-  theme: '',
-  customPalette: [],
-  useCssAnimation: true,
-  style: {
-    fontFamily: 'inherit',
-    chart: {
-      backgroundColor: '#ffffff00',
-      color: '#1A1A1Aff',
-      layout: {
-        bars: {
-          sort: 'asc',
-          useStroke: false,
-          strokeWidth: 2,
-          height: 32,
-          gap: 11,
-          borderRadius: 4,
-          offsetX: -20,
-          paddingRight: 0,
-          useGradient: true,
-          gradientIntensity: 20,
-          fillOpacity: 90,
-          underlayerColor: 'rgba(255, 255, 255, 1)',
-          dataLabels: {
-            color: '#1A1A1Aff',
-            bold: true,
-            fontSize: 12,
-            value: {
-              show: true,
-              roundingValue: 0,
-              prefix: '',
-              suffix: '',
-              formatter: null
+  const lastGender = sex.value ? sex.value : localStorage.getItem('sex');
+  const lastTdee: string | null = tdee.value ? tdee.value : localStorage.getItem('tdee');
+
+  const config = ref<VueUiVerticalBarConfig>({
+  "responsive": false,
+  "theme": '',
+  "customPalette": [],
+  "useCssAnimation": true,
+  "style": {
+    "fontFamily": "inherit",
+    "chart": {
+      "backgroundColor": "#ffffff00",
+      "color": "#1A1A1Aff",
+      "layout": {
+        "bars": {
+          "sort": "asc",
+          "useStroke": false,
+          "strokeWidth": 2,
+          "height": 32,
+          "gap": 11,
+          "borderRadius": 4,
+          "offsetX": -20,
+          "paddingRight": 0,
+          "useGradient": true,
+          "gradientIntensity": 20,
+          "fillOpacity": 90,
+          "underlayerColor": "rgba(255, 255, 255, 1)",
+          "dataLabels": {
+            "color": "#1A1A1Aff",
+            "bold": true,
+            "fontSize": 12,
+            "value": {
+              "show": true,
+              "roundingValue": 0,
+              "prefix": "",
+              "suffix": "",
+              "formatter": null
             },
-            percentage: {
-              show: false,
-              roundingPercentage: 0
+            "percentage": {
+              "show": false,
+              "roundingPercentage": 0
             },
-            offsetX: 0
+            "offsetX": 0
           },
-          nameLabels: {
-            show: true,
-            color: '#1A1A1Aff',
-            bold: false,
-            fontSize: 10,
-            offsetX: 0
+          "nameLabels": {
+            "show": true,
+            "color": "#1A1A1Aff",
+            "bold": false,
+            "fontSize": 10,
+            "offsetX": 0
           },
-          parentLabels: {
-            show: true,
-            color: '#1A1A1Aff',
-            bold: false,
-            fontSize: 10,
-            offsetX: 0
+          "parentLabels": {
+            "show": true,
+            "color": "#1A1A1Aff",
+            "bold": false,
+            "fontSize": 10,
+            "offsetX": 0
           }
         },
-        highlighter: {
-          color: '#1A1A1Aff',
-          opacity: 5
+        "highlighter": {
+          "color": "#1A1A1Aff",
+          "opacity": 5
         },
-        separators: {
-          show: true,
-          color: '#e1e5e800',
-          strokeWidth: 1
+        "separators": {
+          "show": true,
+          "color": "#e1e5e800",
+          "strokeWidth": 1
         }
       },
-      title: {
-        text: 'Tdee',
-        color: '#1A1A1Aff',
-        fontSize: 20,
-        bold: true,
-        textAlign: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        subtitle: {
-          color: '#A1A1A1ff',
-          text: '',
-          fontSize: 16,
-          bold: false
+      "title": {
+        "text": "Tdee",
+        "color": "#1A1A1Aff",
+        "fontSize": 20,
+        "bold": true,
+        "textAlign": "center",
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "subtitle": {
+          "color": "#A1A1A1ff",
+          "text": "",
+          "fontSize": 16,
+          "bold": false
         }
       },
-      legend: {
-        show: false,
-        bold: true,
-        backgroundColor: '#ffffff4d',
-        color: '#1A1A1Aff',
-        fontSize: 14,
-        position: 'top',
-        roundingValue: 0,
-        roundingPercentage: 0,
-        prefix: '',
-        suffix: ''
+      "legend": {
+        "show": false,
+        "bold": true,
+        "backgroundColor": "#ffffff4d",
+        "color": "#1A1A1Aff",
+        "fontSize": 14,
+        "position": "top",
+        "roundingValue": 0,
+        "roundingPercentage": 0,
+        "prefix": "",
+        "suffix": ""
       },
-      tooltip: {
-        show: true,
-        color: '#1A1A1Aff',
-        backgroundColor: '#FFFFFFff',
-        fontSize: 14,
-        customFormat: null,
-        borderRadius: 4,
-        borderColor: 'rgba(225, 229, 232, 1)',
-        borderWidth: 1,
-        backgroundOpacity: 30,
-        position: 'center',
-        offsetY: 24,
-        showValue: true,
-        showPercentage: false,
-        roundingValue: 0,
-        roundingPercentage: 0,
-        prefix: '',
-        suffix: ''
+      "tooltip": {
+        "show": true,
+        "color": "#1A1A1Aff",
+        "backgroundColor": "#FFFFFFff",
+        "fontSize": 14,
+        "customFormat": null,
+        "borderRadius": 4,
+        "borderColor": "rgba(225, 229, 232, 1)",
+        "borderWidth": 1,
+        "backgroundOpacity": 30,
+        "position": "center",
+        "offsetY": 24,
+        "showValue": true,
+        "showPercentage": false,
+        "roundingValue": 0,
+        "roundingPercentage": 0,
+        "prefix": "",
+        "suffix": ""
       }
-    }
-  },
-  userOptions: {
-    show: false,
-    showOnChartHover: false,
-    keepStateOnChartLeave: true,
-    position: 'right',
-    buttons: {
-      tooltip: true,
-      pdf: true,
-      csv: true,
-      img: true,
-      table: true,
-      labels: false,
-      fullscreen: true,
-      sort: true,
-      stack: false,
-      animation: false,
-      annotator: true
     },
-    buttonTitles: {
-      open: 'Open options',
-      close: 'Close options',
-      tooltip: 'Toggle tooltip',
-      pdf: 'Download PDF',
-      csv: 'Download CSV',
-      img: 'Download PNG',
-      table: 'Toggle table',
-      fullscreen: 'Toggle fullscreen',
-      sort: 'Toggle sort',
-      annotator: 'Toggle annotator'
-    }
   },
-  table: {
-    show: false,
-    responsiveBreakpoint: 400,
-    th: {
-      backgroundColor: '#FFFFFFff',
-      color: '#1A1A1Aff',
-      outline: 'none'
+  "userOptions": {
+    "show": false,
+    "showOnChartHover": false,
+    "keepStateOnChartLeave": true,
+    "position": "right",
+    "buttons": {
+      "tooltip": true,
+      "pdf": true,
+      "csv": true,
+      "img": true,
+      "table": true,
+      "labels": false,
+      "fullscreen": true,
+      "sort": true,
+      "stack": false,
+      "animation": false,
+      "annotator": true
     },
-    td: {
-      backgroundColor: '#FFFFFFff',
-      color: '#1A1A1Aff',
-      outline: 'none',
-      roundingValue: 0,
-      roundingPercentage: 0,
-      prefix: '',
-      suffix: ''
+    "buttonTitles": {
+      "open": "Open options",
+      "close": "Close options",
+      "tooltip": "Toggle tooltip",
+      "pdf": "Download PDF",
+      "csv": "Download CSV",
+      "img": "Download PNG",
+      "table": "Toggle table",
+      "fullscreen": "Toggle fullscreen",
+      "sort": "Toggle sort",
+      "annotator": "Toggle annotator"
     }
   },
-  translations: {
-    parentName: 'Group',
-    childName: 'Serie',
-    value: 'Value',
-    percentageToTotal: '% / total',
-    percentageToSerie: '% / group'
+  "table": {
+    "show": false,
+    "responsiveBreakpoint": 400,
+    "th": {
+      "backgroundColor": "#FFFFFFff",
+      "color": "#1A1A1Aff",
+      "outline": "none"
+    },
+    "td": {
+      "backgroundColor": "#FFFFFFff",
+      "color": "#1A1A1Aff",
+      "outline": "none",
+      "roundingValue": 0,
+      "roundingPercentage": 0,
+      "prefix": "",
+      "suffix": ""
+    }
+  },
+  "translations": {
+    "parentName": "Group",
+    "childName": "Serie",
+    "value": "Value",
+    "percentageToTotal": "% / total",
+    "percentageToSerie": "% / group"
   }
 });
 
-const dataset = ref<VueUiVerticalBarDatasetItem>([
-  {
-    name: lastGender === '66.4730' ? "Average Male TDEE" : "Average Female TDEE",
-    value: lastGender === '66.4730' ? 2000 : 1800,
-    color: '#6376DD',
-    children: []
+    
+    const dataset = ref<VueUiVerticalBarDatasetItem[]>([{
+    "name": lastGender === '66.4730' ? "Average Male TDEE" : "Average Female TDEE",
+    "value": lastGender === '66.4730' ? 2000 : 1800,
+    "color": "#6376DD",
+    "children": []
   },
   {
-    name: "Your TDEE",
-    value: lastTdee,
-    color: '#ff6400',
-    children: []
+    "name": "Your TDEE",
+    "value": lastTdee,
+    "color": "#ff6400",
+    "children": []
   }
 ]);
-</script>
-  
+
+
+</script>    
 
 
 <template>
