@@ -205,7 +205,7 @@ const { sex, isSexReady } = useSex();
   },
   {
     "name": "Your TDEE",
-    "value": parseInt(lastTdee),
+    "value": lastTdee,
     "color": "#ff6400",
     "children": []
   }
