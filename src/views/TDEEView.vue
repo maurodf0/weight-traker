@@ -22,7 +22,7 @@ const { sex, isSexReady } = useSex();
     import "vue-data-ui/style.css";
 
   const lastGender = sex.value ? sex.value : localStorage.getItem('sex');
-  const lastTdee = tdee.value ? tdee.value : parseInt(localStorage.getItem('tdee'));
+  const lastTdee = tdee.value ? tdee.value : localStorage.getItem('tdee');
   const config = ref({
   "responsive": false,
   "theme": '',
@@ -205,7 +205,7 @@ const { sex, isSexReady } = useSex();
   },
   {
     "name": "Your TDEE",
-    "value": lastTdee,
+    "value": parseInt(tdee.value),
     "color": "#ff6400",
     "children": []
   }
