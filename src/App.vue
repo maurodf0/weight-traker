@@ -10,6 +10,7 @@ onMounted(() => {
   // Accediamo al mode.value per leggere e modificare la modalità
   mode.value = mode.value === 'dark' ? 'light' : 'dark'
 })
+
 </script>
 
 <template>
