@@ -12,6 +12,7 @@ const mode = useColorMode() // Ref<'dark' | 'light'>
 const toggleMode = () => {
   // Accediamo a mode.value per leggere e modificare la modalità
   mode.value = mode.value === 'dark' ? 'light' : 'dark'
+  
 }
 
 const  { height, submitHeight } = useHeight()
