@@ -98,7 +98,7 @@ const { activity, submitActivity, activityOptions } = useActivity()
       <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">
         <h2 class="text-xl font-bold dark:text-white">Height</h2>
         <p> Insert your height in cm for BMI and TDEE calculations</p>  
-        <HeightInput v-model="height" class="mt-4" @heightHandle="submitHeight" />
+        <HeightInput class="mt-4" @heightHandle="submitHeight" />
       </section>
       
       <section class="wrapper my-4 bg-white dark:bg-slate-700 p-4 rounded-lg">

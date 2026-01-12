@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import useHeight from '@/composables/useHeight'
 
 const { height } = useHeight()
-
-const heightInput = ref<number | null>(null)
-
 
 defineEmits(['heightHandle'])
 </script>
 
 
 <template>
-  <form class="flex flex-col gap-4" @submit.prevent="$emit('heightHandle', heightInput)">
+  <form class="flex flex-col gap-4" @submit.prevent="$emit('heightHandle', height)">
     <input step="0.1" 
            class="px-4 py-2 border border-gray-300 focus:border-slate-500 focus:ring focus:ring-blue-200 rounded-lg"
            type="number"
