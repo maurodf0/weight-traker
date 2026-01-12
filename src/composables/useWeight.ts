@@ -1,17 +1,20 @@
 import { onMounted, ref, computed } from 'vue';
 
+const allWeights = ref<{ weight: number; date: Date }[]>([]);
+const isWeightReady = ref(false);
+
 export default function useWeight() {
-  const allWeights = ref<{ weight: number; date: Date }[]>([]);
-  const isWeightReady = ref(false);
 
   onMounted(() => {
-    const storedWeights = localStorage.getItem('allWeights');
-    if (storedWeights) {
-      allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
-        weight: w.weight,
-        date: new Date(w.date)
-      }));
-      isWeightReady.value = true; // Dati caricati con successo
+    if (!isWeightReady.value) {
+        const storedWeights = localStorage.getItem('allWeights');
+        if (storedWeights) {
+          allWeights.value = JSON.parse(storedWeights).map((w: { weight: number; date: string }) => ({
+            weight: w.weight,
+            date: new Date(w.date)
+          }));
+          isWeightReady.value = true; // Dati caricati con successo
+        }
     }
   });
 

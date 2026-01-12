@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref } from 'vue';
+import { watch, ref, computed } from 'vue';
 import useCalculations from '@/composables/useCalculations';
 import useTracker from '@/composables/useTracker';
 import useSex from '@/composables/useSex';
@@ -197,19 +197,23 @@ const { sex, isSexReady } = useSex();
 });
 
     
-    const dataset = ref<VueUiVerticalBarDatasetItem[]>([{
-    "name": lastGender === '66.4730' ? "Average Male TDEE" : "Average Female TDEE",
-    "value": lastGender === '66.4730' ? 2000 : 1800,
-    "color": "#6376DD",
-    "children": []
-  },
-  {
-    "name": "Your TDEE",
-    "value": Number(lastTdee),
-    "color": "#ff6400",
-    "children": []
-  }
-]);
+    const dataset = computed<VueUiVerticalBarDatasetItem[]>(() => {
+      const currentSex = sex.value || localStorage.getItem('sex');
+      const currentTdee = tdee.value || localStorage.getItem('tdee');
+      
+      return [{
+        "name": currentSex === '66.4730' ? "Average Male TDEE" : "Average Female TDEE",
+        "value": currentSex === '66.4730' ? 2000 : 1800,
+        "color": "#6376DD",
+        "children": []
+      },
+      {
+        "name": "Your TDEE",
+        "value": Number(currentTdee || 0),
+        "color": "#ff6400",
+        "children": []
+      }];
+    });
 
 
 </script>    

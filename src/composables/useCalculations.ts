@@ -33,14 +33,16 @@ export default function useCalculations() {
 
   const calculateBmi = computed(() => {
     if (areAllFieldsReady.value) {
+      isLoading.value = false;
       return (currentWeight.value / (heightinMeters.value ** 2)).toFixed(2);
-      isLoading.value = true;
     }
+    isLoading.value = true;
     return 'Loading...';
   });
 
   const calculateTdee = computed(() => {
     if (areAllFieldsReady.value) {
+      isLoading.value = false;
       const weightFactor = sex.value === '655.0955' ? 9.563 : 13.7516;
       const heightFactor = sex.value === '655.0955' ? 1.8496 : 5.0033;
       const ageFactor = sex.value === '655.0955' ? 4.6756 : 6.755;
@@ -53,8 +55,8 @@ export default function useCalculations() {
 
       const activityAsNumber = Number(activity.value);
       return (REE * activityAsNumber).toFixed(2);
-      isLoading.value = false
     }
+    isLoading.value = true;
     return 'Loading...';
     
   });

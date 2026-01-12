@@ -1,9 +1,10 @@
 import { watch, ref, onMounted } from "vue"
 
+const activity = ref<string>('');
+const isActivityReady = ref<boolean>(false);
+const activityOptions = ['sedentary', 'lightlyActive', 'moderatelyActive', 'veryActive', 'extremelyActive'];
+
 export default function useActivity() {
-    const activity = ref<string>('');
-    const isActivityReady = ref<boolean>(false);
-    const activityOptions = ['sedentary', 'lightlyActive', 'moderatelyActive', 'veryActive', 'extremelyActive'];
 
     const submitActivity = (newActivity: string) => {
         activity.value = newActivity;
@@ -17,10 +18,12 @@ export default function useActivity() {
     });
 
     onMounted(() => {
-        const storedActivity = localStorage.getItem('activity');
-        if (storedActivity) {
-            activity.value = storedActivity;
-            isActivityReady.value = true;
+        if (!isActivityReady.value) {
+            const storedActivity = localStorage.getItem('activity');
+            if (storedActivity) {
+                activity.value = storedActivity;
+                isActivityReady.value = true;
+            }
         }
     });
 

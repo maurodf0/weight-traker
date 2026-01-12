@@ -1,8 +1,9 @@
 import { watch, ref, onMounted } from "vue"
 
+const sex = ref<string>('')
+const isSexReady = ref<boolean>(false)
+
 export default function useSex() {
-    const sex = ref<string>('')
-    const isSexReady = ref<boolean>(false)
 
     watch(sex, () => {
         localStorage.setItem('sex', sex.value);
@@ -16,10 +17,12 @@ export default function useSex() {
     };
 
     onMounted(() => {
-        const storedSex = localStorage.getItem('sex');
-        if (storedSex) {
-            sex.value = storedSex;
-            isSexReady.value = true;
+        if (!isSexReady.value) {
+            const storedSex = localStorage.getItem('sex');
+            if (storedSex) {
+                sex.value = storedSex;
+                isSexReady.value = true;
+            }
         }
     });
 
